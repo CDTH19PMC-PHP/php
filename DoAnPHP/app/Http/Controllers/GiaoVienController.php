@@ -9,9 +9,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 
-class GiangVienController extends Controller
+class GiaoVienController extends Controller
 {
     function DanhSachLop($id){
         $giaovien =DB::table('giao_vien')->join('lop','giao_vien.id','=','lop.ma_giao_vien',)->where('lop.ma_giao_vien','=',$id)->get();
@@ -139,4 +141,22 @@ class GiangVienController extends Controller
         $lop = $id;
         return view('form-duyet-hoc-sinh',compact('giaovien','lop','hs'));
     }
+
+    ///////////////// Trần Quang Thiện ////////////
+    public function dangNhapGV(){
+        return view('dang-nhap-giaovien');
+    }
+    //Xử lý Đăng nhập
+    public function xuLyDangNhapGV(Request $request){
+        $gv = GiaoVien::where('username',$request->username)->first();
+        if(empty($gv)){
+            echo "Tên đăng nhập không đúng";
+        }elseif(!Hash::check($request->password,$gv->password)){
+            echo "Mật khẩu không đúng";
+        }else{
+            echo $gv->ho_ten;
+        }
+    }
+    ///////////////// Trần Quang Thiện ////////////
+   
 }

@@ -17,6 +17,7 @@ class CreateChiTietBangDiem extends Migration
             $table->id();
             $table->double('diem');
             $table->double('diem_trung_binh');
+            $table->integer('trang_thai')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

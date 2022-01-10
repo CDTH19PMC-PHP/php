@@ -15,12 +15,13 @@ class CreateStudentTable extends Migration
     {
         Schema::create('hoc_sinh', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('email')->unique();
-            $table->string('mat_khau');
+            $table->string('username')->unique();
+            $table->string('password');
             $table->string('ho_ten',50);      
-            $table->date('ngay_sinh');
+            $table->string('ngay_sinh');
             $table->text('dia_chi');
             $table->string('so_dien_thoai',13);
+            $table->integer('trang_thai')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

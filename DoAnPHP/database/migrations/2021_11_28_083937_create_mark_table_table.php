@@ -16,6 +16,7 @@ class CreateMarkTableTable extends Migration
         Schema::create('bang_diem', function (Blueprint $table) {
             $table->increments('id');
             $table->dateTime('thoi_gian');
+            $table->integer('trang_thai')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

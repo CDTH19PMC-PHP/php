@@ -19,7 +19,7 @@ class CreateClassTable extends Migration
             $table->integer('so_luong');
             $table->date('thoi_gian');
             $table->string('ma_lop');
-            $table->string('trang_thai');
+            $table->integer('trang_thai')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

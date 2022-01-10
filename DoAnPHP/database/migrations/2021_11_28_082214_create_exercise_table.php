@@ -16,9 +16,9 @@ class CreateExerciseTable extends Migration
         Schema::create('bai_tap', function (Blueprint $table) {
             $table->increments('id');
             $table->string('noi_dung');
-           
             $table->dateTime('thoi_gian');
             $table->integer('diem');
+            $table->integer('trang_thai')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

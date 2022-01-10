@@ -40,6 +40,24 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'api' => [
+            'driver' => 'token',
+            'provider' => 'users',
+            'hash' => false, 
+        ],
+        // 'admin' => [
+        //     'driver' => 'session',
+        //     'provider' => 'users',
+        // ],
+        // 'admin' => [
+        //     'driver' => 'session',
+        //     'provider' => 'admins',
+        // ],
+        // 'giaovien' => [
+        //     'driver' => 'session',
+        //     'provider' => 'giaoviens',
+        // ],
+        
     ],
 
     /*
@@ -62,9 +80,17 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\Admin::class,
         ],
-
+        // 'admins' => [
+        //     'driver' => 'eloquent',
+        //     'model' => App\Models\Admin::class,
+        // ],
+        // 'giaoviens' => [
+        //     'driver' => 'eloquent',
+        //     'model' => App\Models\GiaoVien::class,
+        // ],
+        
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',

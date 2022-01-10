@@ -15,12 +15,13 @@ class CreateAccountTable extends Migration
     {
         Schema::create('admin', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('email')->unique();
-            $table->string('mat_khau',15);
+            $table->string('username')->unique();
+            $table->string('password');
             $table->string('ho_ten',50);
             $table->text('dia_chi');
-            $table->date('ngay_sinh');
+            $table->string('ngay_sinh');
             $table->string('so_dien_thoai',13);
+            $table->integer('trang_thai')->default(0);
             $table ->softDeletes();
             $table->timestamps();
         });

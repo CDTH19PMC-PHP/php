@@ -10,6 +10,8 @@ use App\Models\HocSinhThuocLop;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Hash;
 class HocSinhController extends Controller
 {
     function DanhSachLop($id){
@@ -87,4 +89,20 @@ class HocSinhController extends Controller
         $idhs = $id;
         return view('hoc-sinh-danh-sach-lop',compact('danhsachlop','idhs'));
     }
+    ///////////////// Trần Quang Thiện ////////////
+    public function dangNhapHS(){
+        return view('dang-nhap');
+    }
+
+    public function xuLyDangNhapHS(Request $request){
+        $hocsinh = Hocsinh::where('username',$request->username)->first();
+        if(empty($hocsinh)){
+            echo "Tên đăng nhập không đúng";
+        }elseif(!Hash::check($request->password,$hocsinh->password)){
+            echo "Mật khẩu không đúng";
+        }else{
+            echo $hocsinh->ho_ten;
+        }
+    }
+    ///////////////// Trần Quang Thiện ////////////
 }

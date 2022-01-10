@@ -15,6 +15,7 @@ class CreateBaiTapSinhVien extends Migration
     {
         Schema::create('bai_tap_sinh_vien', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('trang_thai')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });
