@@ -15,6 +15,7 @@ class CreateHocSinhHocLop extends Migration
     {
         Schema::create('hoc_sinh_hoc_lop', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('trang_thai_lop')->default(0);
             $table->timestamps();
         });
     }
