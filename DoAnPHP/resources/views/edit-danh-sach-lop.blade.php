@@ -37,7 +37,7 @@ Thông tin lớp
 
     <th class="column2">{{$a->ma_hoc_sinh}}</th>
     <th class="column3">{{$a->ho_ten}}</th>
-    <th class="column3">{{$a->email}}</th>
+    <th class="column3">{{$a->username}}</th>
 </tr>
 
 @empty

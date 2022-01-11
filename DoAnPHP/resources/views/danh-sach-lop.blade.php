@@ -1,6 +1,7 @@
 @extends('layout_ds.index')
 @section('content')
 <a class="btn btn--radius btn--green" href="{{route('thong-tin-ca-nhan',['id'=>$idgiaovien])}}">Thông tin cá nhân</a>
+<a class="btn btn--radius btn--green" href="{{route('dang-nhap-gv')}}">Đăng xuất</a>
 
 
 @if(session('success'))

@@ -25,7 +25,7 @@ class AdminController extends Controller
     }
     ///////////////// Trần Quang Thiện ////////////
     public function dangNhapAD(){
-        return view('dang-nhap-admin');
+        return view('dang-nhap');
     }
 
     //Xử lý Đăng nhập
@@ -35,7 +35,7 @@ class AdminController extends Controller
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
         // Chứng thực thành công
         $user = Auth::user();
-        echo "{$user->ho_ten} - {$user->username}";
+        
         }else{
             echo 'Đăng nhập không thành công';
         }

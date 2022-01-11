@@ -3,7 +3,8 @@
 Học sinh
 @endsection
 @section('content')
-<a class="btn btn--radius btn--green" href="{{route('hs-thong-tin-ca-nhan',$idhs)}}">Thông tin cá nhân</a></br>
+<a class="btn btn--radius btn--green" href="{{route('hs-thong-tin-ca-nhan',$idhs)}}">Thông tin cá nhân</a>
+<a class="btn btn--radius btn--green" href="{{route('dang-nhap-hs')}}">Đăng xuất</a></br>
 
 @if(session('success2'))
 <div class="alert alert-success">

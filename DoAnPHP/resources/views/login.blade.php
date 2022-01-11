@@ -77,20 +77,18 @@
 					</div>
 					
 					<div class="text-center p-t-46 p-b-20">
-						<span class="txt2">
-							or sign up using
-						</span>
+					<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Dropdown button
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="{{route('dang-nhap-hs')}}">Học sinh</a>
+    <a class="dropdown-item" href="{{route('dang-nhap-gv')}}">Giáo Viên</a>
+    <a class="dropdown-item" href="{{route('dang-nhap-ad')}}">Admin</a>
+  </div>
+</div>
 					</div>
 
-					<div class="login100-form-social flex-c-m">
-						<a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
-							<i class="fa fa-facebook-f" aria-hidden="true"></i>
-						</a>
-
-						<a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
-							<i class="fa fa-twitter" aria-hidden="true"></i>
-						</a>
-					</div>
 				</form>
 
 				<div class="login100-more" style="background-image: url({{asset('Login_v18/images/bg-01.jpg')}});">

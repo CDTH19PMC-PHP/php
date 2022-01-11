@@ -51,7 +51,7 @@ class GiaoVienController extends Controller
     function SuaThongTinCaNhan(Request $req,$id){
         $gv = GiaoVien::find($id);
         $gv->ho_ten=$req->ho_ten;
-        $gv->email=$req->email;
+        $gv->username = $req->email;
         $gv->ngay_sinh=$req->ngay_sinh;
         $gv->dia_chi=$req->dia_chi;
         $gv->so_dien_thoai=$req->so_dien_thoai;
@@ -81,7 +81,7 @@ class GiaoVienController extends Controller
 
     function ThemHocSinh(Request $req,$idgv,$idlop){
        
-        $hocsinh = DB::table('hoc_sinh')->select('id')->where('email','like',$req->email)->get();
+        $hocsinh = DB::table('hoc_sinh')->select('id')->where('username','like',$req->email)->get();
         $allhocisnh =DB::table('hoc_sinh_hoc_lop')->where('ma_lop','=',$idlop)->get();
         $diem = 0;
         foreach($hocsinh as $hocsinhs){
@@ -122,7 +122,7 @@ class GiaoVienController extends Controller
     }
 
     function FormDuyet($gv, $id){
-        $hs = DB::table('hoc_sinh_hoc_lop')->join('hoc_sinh','hoc_sinh_hoc_lop.ma_hoc_sinh','=','hoc_sinh.id')->select('hoc_sinh_hoc_lop.id','ma_hoc_sinh','email','ho_ten')->where('ma_lop','=',$id)->where('trang_thai_lop','=',0)->get();
+        $hs = DB::table('hoc_sinh_hoc_lop')->join('hoc_sinh','hoc_sinh_hoc_lop.ma_hoc_sinh','=','hoc_sinh.id')->select('hoc_sinh_hoc_lop.id','ma_hoc_sinh','username','ho_ten')->where('ma_lop','=',$id)->where('trang_thai_lop','=',0)->get();
         $giaovien = $gv;
         $lop = $id;
         return view('form-duyet-hoc-sinh',compact('giaovien','lop','hs'));
@@ -136,7 +136,7 @@ class GiaoVienController extends Controller
         $tanghocsinh->save();
         $req -> session()->flash('success', 'Đã chấp nhận học sinh vào lớp');
 
-        $hs = DB::table('hoc_sinh_hoc_lop')->join('hoc_sinh','hoc_sinh_hoc_lop.ma_hoc_sinh','=','hoc_sinh.id')->select('hoc_sinh_hoc_lop.id','ma_hoc_sinh','email','ho_ten')->where('ma_lop','=',$id)->where('trang_thai_lop','=',0)->get();
+        $hs = DB::table('hoc_sinh_hoc_lop')->join('hoc_sinh','hoc_sinh_hoc_lop.ma_hoc_sinh','=','hoc_sinh.id')->select('hoc_sinh_hoc_lop.id','ma_hoc_sinh','username','ho_ten')->where('ma_lop','=',$id)->where('trang_thai_lop','=',0)->get();
         $giaovien = $gv;
         $lop = $id;
         return view('form-duyet-hoc-sinh',compact('giaovien','lop','hs'));
@@ -154,7 +154,7 @@ class GiaoVienController extends Controller
         }elseif(!Hash::check($request->password,$gv->password)){
             echo "Mật khẩu không đúng";
         }else{
-            echo $gv->ho_ten;
+            return redirect()->route('ds-lop',$gv->id);
         }
     }
     ///////////////// Trần Quang Thiện ////////////

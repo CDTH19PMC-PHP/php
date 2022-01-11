@@ -24,7 +24,7 @@ Thông tin lớp
 
     <th class="column2">{{$a->ma_hoc_sinh}}</th>
     <th class="column3">{{$a->ho_ten}}</th>
-    <th class="column3">{{$a->email}}</th>
+    <th class="column3">{{$a->username}}</th>
     <th><a  class="btn btn--radius btn--green" href="{{route('xl-duyet-hoc-sinh',['gv'=>$giaovien,'id'=>$lop,'hs'=>$a->id])}}" onclick="return confirm('Bạn có muốn chấp nhận học sinh này vô lớp không?')">Chấp nhận</a></th>
 </tr>
 @empty

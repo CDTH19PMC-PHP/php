@@ -15,9 +15,7 @@ use App\Http\Controllers\AdminController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function(){
-    return view('login');
-})->name('login');
+Route::get('/',[HocSinhController::class,'dangNhapHS']);
 
 // Giảng viên
 

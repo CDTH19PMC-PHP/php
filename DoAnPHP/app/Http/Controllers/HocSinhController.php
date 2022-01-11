@@ -31,7 +31,7 @@ class HocSinhController extends Controller
     function XuLyThongTinCaNhan(Request $req,$id){
         $hs = HocSinh::find($id);
         $hs->ho_ten=$req->ho_ten;
-        $hs->email=$req->email;
+        $hs->username=$req->email;
         $hs->ngay_sinh=$req->ngay_sinh;
         $hs->dia_chi=$req->dia_chi;
         $hs->so_dien_thoai=$req->so_dien_thoai;
@@ -96,12 +96,18 @@ class HocSinhController extends Controller
 
     public function xuLyDangNhapHS(Request $request){
         $hocsinh = Hocsinh::where('username',$request->username)->first();
+
+        $danhsachlop = DB::table('lop')->join('hoc_sinh_hoc_lop','lop.id','=','hoc_sinh_hoc_lop.ma_lop')->select('lop.ma_lop','so_luong','ten_lop','trang_thai')->where('hoc_sinh_hoc_lop.ma_hoc_sinh','=',$hocsinh->id)->where('hoc_sinh_hoc_lop.trang_thai_lop','=','1')->get();
+        
+        $idhs = $hocsinh->id;
+     
         if(empty($hocsinh)){
             echo "Tên đăng nhập không đúng";
         }elseif(!Hash::check($request->password,$hocsinh->password)){
             echo "Mật khẩu không đúng";
         }else{
-            echo $hocsinh->ho_ten;
+            return redirect()->route('ds-hs-lop',$hocsinh->id);
+          
         }
     }
     ///////////////// Trần Quang Thiện ////////////

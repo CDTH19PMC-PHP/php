@@ -13,7 +13,7 @@
 				</div>
 
 				<div class="wrap-input1 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-                <input class="input1" type="text" name="email" value="{{$thongtin->email}}" readonly placeholder="Email">
+                <input class="input1" type="text" name="email" value="{{$thongtin->username}}" readonly placeholder="Email">
 					<span class="shadow-input1"></span>
 				</div>
 

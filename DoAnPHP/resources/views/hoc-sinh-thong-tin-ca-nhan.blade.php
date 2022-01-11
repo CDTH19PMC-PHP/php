@@ -29,7 +29,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <p class="m-b-10 f-w-600">Email</p>
-                                        <p class="text-muted f-w-400">{{$thongtin->email}} </p>
+                                        <p class="text-muted f-w-400">{{$thongtin->username}} </p>
                                     </div>
                                 </div>
                                 <div class="row">
