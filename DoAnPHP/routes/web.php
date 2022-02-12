@@ -77,3 +77,4 @@ Route::get('/admin-quan-ly-gv',[AdminController::class,'dsGiaoVienAD'])->name('d
 Route::get('/admin-quan-ly-hs',[AdminController::class,'dsHocSinhAD'])->name('ds-quan-ly-hs');
 ///////////////// Trần Quang Thiện ////////////
 ///////////////// Trần Quang Thiện ////////////
+Route::get('/page-login',[AdminController::class,'loginAD'])->name('login-ad');

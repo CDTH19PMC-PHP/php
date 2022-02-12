@@ -104,4 +104,7 @@ class AdminController extends Controller
         return view('admin-quan-ly-hs',compact('dsHocSinh'));
     }
     //////////////////////////////////////////
+    public function loginAD(){
+        return view('dashboard.page-login');
+    }
 }
