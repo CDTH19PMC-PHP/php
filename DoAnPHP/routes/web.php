@@ -78,3 +78,8 @@ Route::get('/admin-quan-ly-hs',[AdminController::class,'dsHocSinhAD'])->name('ds
 ///////////////// Trần Quang Thiện ////////////
 ///////////////// Trần Quang Thiện ////////////
 Route::get('/page-login',[AdminController::class,'loginAD'])->name('login-ad');
+Route::post('/page-login', [AdminController::class,'xuLyloginAD'])->name('xl-login-ad');
+
+Route::get('/index-admin',[AdminController::class,'indexAD'])->name('index-ad');
+
+Route::get('/table-data-gv',[AdminController::class,'tableDataGV'])->name('table-data-gv');

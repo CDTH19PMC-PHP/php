@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/main.css')}}">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/font-awesome/4.7.0/css/font-awesome.min.css')}}">
-    <title>Login - Vali Admin</title>
+    <title>Login</title>
   </head>
   <body>
     <section class="material-half-bg">
@@ -16,18 +16,19 @@
     </section>
     <section class="login-content">
       <div class="logo">
-        <h1>Vali</h1>
+        <h1>E-Learning</h1>
       </div>
       <div class="login-box">
-        <form class="login-form" action="https://pratikborsadiya.in/vali-admin/index.html">
+        <form class="login-form" action="{{route('xl-login-ad')}}" method="POST">
+          @csrf
           <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN IN</h3>
           <div class="form-group">
             <label class="control-label">USERNAME</label>
-            <input class="form-control" type="text" placeholder="Email" autofocus>
+            <input class="form-control" type="username" name="username" placeholder="Email" autofocus>
           </div>
           <div class="form-group">
             <label class="control-label">PASSWORD</label>
-            <input class="form-control" type="password" placeholder="Password">
+            <input class="form-control" type="password" name="password" placeholder="Password">
           </div>
           <div class="form-group">
             <div class="utility">
@@ -40,10 +41,10 @@
             </div>
           </div>
           <div class="form-group btn-container">
-            <button class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
+            <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
           </div>
         </form>
-        <form class="forget-form" action="https://pratikborsadiya.in/vali-admin/index.html">
+        <form class="forget-form" action="#">
           <h3 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>Forgot Password ?</h3>
           <div class="form-group">
             <label class="control-label">EMAIL</label>
@@ -57,6 +58,18 @@
           </div>
         </form>
       </div>
+      <div class="text-center p-t-46 p-b-20">
+						<div class="dropdown">
+							<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Dropdown Login
+							</button>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+								<a class="dropdown-item" href="{{route('dang-nhap-hs')}}">Học sinh</a>
+								<a class="dropdown-item" href="{{route('dang-nhap-gv')}}">Giáo Viên</a>
+								<a class="dropdown-item" href="{{route('login-ad')}}">Admin</a>
+							</div>
+						</div>
+					</div>
     </section>
     <!-- Essential javascripts for application to work-->
     <script src="{{asset('dashboard/js/jquery-3.2.1.min.js')}}"></script>

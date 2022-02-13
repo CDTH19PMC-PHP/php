@@ -73,16 +73,16 @@
 					</div>
 
                     <div class="text-center p-t-46 p-b-20">
-					<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Dropdown button
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="{{route('dang-nhap-hs')}}">Học sinh</a>
-    <a class="dropdown-item" href="{{route('dang-nhap-gv')}}">Giáo Viên</a>
-    <a class="dropdown-item" href="{{route('dang-nhap-ad')}}">Admin</a>
-  </div>
-</div>
+						<div class="dropdown">
+							<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Dropdown Login
+							</button>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+								<a class="dropdown-item" href="{{route('dang-nhap-hs')}}">Học sinh</a>
+								<a class="dropdown-item" href="{{route('dang-nhap-gv')}}">Giáo Viên</a>
+								<a class="dropdown-item" href="{{route('login-ad')}}">Admin</a>
+							</div>
+						</div>
 					</div>
     </form>
 
