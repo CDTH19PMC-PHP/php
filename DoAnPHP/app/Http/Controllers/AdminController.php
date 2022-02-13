@@ -24,22 +24,40 @@ class AdminController extends Controller
         return view('admin-danh-sach-lop',compact('giaovien','idgiaovien'));
     }
     ///////////////// Trần Quang Thiện ////////////
-    public function dangNhapAD(){
-        return view('dang-nhap');
-    }
+    // public function dangNhapAD(){
+    //     return view('dang-nhap');
+    // }
 
-    //Xử lý Đăng nhập
-    public function xuLyDangNhapAD(Request $request){
+    // //Xử lý Đăng nhập
+    // public function xuLyDangNhapAD(Request $request){
+    //     //     // return view('xl-dang-nhap');
+    //     //     dd($request);
+    //     if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
+    //     // Chứng thực thành công
+    //     $user = Auth::user();
+        
+    //     }else{
+    //         echo 'Đăng nhập không thành công';
+    //     }
+    // }
+    public function loginAD(){
+        return view('dashboard.page-login');
+    }
+    public function xuLyloginAD(Request $request){
         //     // return view('xl-dang-nhap');
         //     dd($request);
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
         // Chứng thực thành công
         $user = Auth::user();
-        
+        return view('dashboard.index');
         }else{
             echo 'Đăng nhập không thành công';
         }
     }
+    public function indexAD(){
+        return view('dashboard.index');
+    }
+
     function FormThongTinCaNhanAD($id){
         $thongtin = Admin::find($id);
         return view('form-admin-thong-tin-ca-nhan',compact('thongtin'));
@@ -104,7 +122,9 @@ class AdminController extends Controller
         return view('admin-quan-ly-hs',compact('dsHocSinh'));
     }
     //////////////////////////////////////////
-    public function loginAD(){
-        return view('dashboard.page-login');
+    public function tableDataGV(){
+        $dsGiaoVien = GiaoVien::all();
+        //$giaoVien = DB::table('giao_vien')->get();
+        return view('admin-quan-ly-gv',compact('dsGiaoVien'));
     }
 }
