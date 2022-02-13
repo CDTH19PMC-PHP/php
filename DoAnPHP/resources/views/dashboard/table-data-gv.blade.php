@@ -114,7 +114,7 @@
         </li> -->
         <li class="treeview is-expanded"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Danh sách quản lý</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href="{{route('table-data-gv')}}><i class="icon fa fa-circle-o"></i> Quản lý Giáo Viên</a></li>
+            <li><a class="treeview-item" href="{{route('table-data-gv')}}"><i class="icon fa fa-circle-o"></i> Quản lý Giáo Viên</a></li>
             <li><a class="treeview-item active" href="{{route('table-data-hs')}}"><i class="icon fa fa-circle-o"></i> Quản lý Học Sinh</a></li>
           </ul>
         </li>
@@ -152,7 +152,6 @@
                 <thead>
                   <tr>
                     <th>Email</th>
-                    <th>Password</th>
                     <th>Họ và tên</th>
                     <th>Địa chỉ</th>
                     <th>Ngày sinh</th>
@@ -164,11 +163,17 @@
                   @if($dsgv->trang_thai==1)
                   <tr>
                       <td>{{$dsgv->username}}</td>
-                      <td>{{$dsgv->password}}</td>
                       <td>{{$dsgv->ho_ten}}</td>
                       <td>{{$dsgv->dia_chi}}</td>
                       <td>{{$dsgv->ngay_sinh}}</td>
                       <td>{{$dsgv->so_dien_thoai}}</td>
+                      <th><a class="" style="text-decoration: none; color:red" onclick="return confirm('Bạn có chắc không?')" 
+                      href="{{route('xoa-ds-quan-ly-gv', $dsgv->id)}}">Xóa </a>|
+                      <a class="" style="text-decoration: none; color:black"
+                      href="{{route('form-information-gv', $dsgv->id)}}"> Sửa</a>|
+                      <a class="" style="text-decoration: none; color:black"
+                      href="{{route('form-reset-password-gv', $dsgv->id)}}">Cài lại mật khẩu</a>
+                      </th>
                   </tr>
                   @endif
                   @empty

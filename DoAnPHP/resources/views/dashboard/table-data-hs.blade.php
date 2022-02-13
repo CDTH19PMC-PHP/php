@@ -152,7 +152,6 @@
                 <thead>
                   <tr>
                     <th>Email</th>
-                    <th>Password</th>
                     <th>Họ và tên</th>
                     <th>Địa chỉ</th>
                     <th>Ngày sinh</th>
@@ -164,11 +163,17 @@
                   @if($dshs->trang_thai==1)
                   <tr>
                       <td>{{$dshs->username}}</td>
-                      <td>{{$dshs->password}}</td>
                       <td>{{$dshs->ho_ten}}</td>
                       <td>{{$dshs->dia_chi}}</td>
                       <td>{{$dshs->ngay_sinh}}</td>
                       <td>{{$dshs->so_dien_thoai}}</td>
+                      <td><a class="" style="text-decoration: none; color:red" onclick="return confirm('Bạn có chắc không?')" 
+                      href="{{route('xoa-ds-quan-ly-hs', $dshs->id)}}">Xóa </a>|
+                      <a class="" style="text-decoration: none; color:black"
+                      href="{{route('form-information-hs', $dshs->id)}}"> Sửa</a>|
+                      <a class="" style="text-decoration: none; color:black"
+                      href="{{route('form-reset-password-hs', $dshs->id)}}">Cài lại mật khẩu</a>
+                      </td>
                   </tr>
                   @endif
                   @empty
