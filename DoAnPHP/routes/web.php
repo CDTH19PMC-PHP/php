@@ -59,7 +59,7 @@ Route::get('/admin/{id}',[AdminController::class,'DanhSachLop'])->name('admin-ds
             ///// Danh sách học sinh /////
     Route::get('/table-data-hs',[AdminController::class,'tableDataHS'])->name('table-data-hs');
     // Thêm học sinh
-    Route::get('/admin-quan-ly-hs-add',[AdminController::class,'addGVform'])->name('add-hs-form');
+    Route::get('/admin-quan-ly-hs-add',[AdminController::class,'addHSform'])->name('add-hs-form');
     Route::post('/admin-quan-ly-hs-add',[AdminController::class,'handleAddHS'])->name('handle-add-hs');
     // Xóa
     Route::get('/admin-quan-ly-hs/{id}',[AdminController::class,'deleteDSHocSinhAD'])->name('xoa-ds-quan-ly-hs');
