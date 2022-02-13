@@ -60,7 +60,7 @@ class AdminController extends Controller
 
     function FormThongTinCaNhanAD($id){
         $thongtin = Admin::find($id);
-        return view('form-admin-thong-tin-ca-nhan',compact('thongtin'));
+        return view('dashboard.form-admin-thong-tin-ca-nhan',compact('thongtin'));
     }
     function XuLyThongTinCaNhanAD(Request $req,$id){
         $ad = Admin::find($id);
@@ -70,12 +70,12 @@ class AdminController extends Controller
         $ad->so_dien_thoai=$req->so_dien_thoai;
         $ad->save();
         $thongtin = Admin::find($id);
-        return view('thong-tin-ca-nhan-ad',compact('thongtin'));
+        return view('dashboard.thong-tin-ca-nhan-ad',compact('thongtin'));
     }
 
     public function changePW($id){
         $change = Admin::find($id); 
-        return view('form-admin-thay-doi-pw',compact('change'));
+        return view('dashboard.form-admin-thay-doi-pw',compact('change'));
         
     }
     
@@ -107,24 +107,16 @@ class AdminController extends Controller
 
         return redirect()->back()->with("success","Mật khẩu đã được thay đổi thành công!");
     }
-
     // danh sách quản lý Giáo Viên
-    public function dsGiaoVienAD(){
-        $dsGiaoVien = GiaoVien::all();
-        //$giaoVien = DB::table('giao_vien')->get();
-        return view('admin-quan-ly-gv',compact('dsGiaoVien'));
-    }
-
-    // danh sách quản lý Học Sinh
-    public function dsHocSinhAD(){
-        $dsHocSinh = HocSinh::all();
-        //$giaoVien = DB::table('giao_vien')->get();
-        return view('admin-quan-ly-hs',compact('dsHocSinh'));
-    }
-    //////////////////////////////////////////
     public function tableDataGV(){
         $dsGiaoVien = GiaoVien::all();
         //$giaoVien = DB::table('giao_vien')->get();
-        return view('admin-quan-ly-gv',compact('dsGiaoVien'));
+        return view('dashboard.table-data-gv',compact('dsGiaoVien'));
+    }
+    // danh sách quản lý Học Sinh
+    public function tableDataHS(){
+        $dsHocSinh = HocSinh::all();
+        //$giaoVien = DB::table('giao_vien')->get();
+        return view('dashboard.table-data-hs',compact('dsHocSinh'));
     }
 }

@@ -292,12 +292,12 @@
           ></a>
           <ul class="treeview-menu">
             <li>
-              <a class="treeview-item" href="#"
+              <a class="treeview-item" href="{{route('table-data-gv')}}"
                 ><i class="icon fa fa-circle-o"></i> Quản lý Giáo Viên</a
               >
             </li>
             <li>
-              <a class="treeview-item" href="#"
+              <a class="treeview-item" href="{{route('table-data-hs')}}"
                 ><i class="icon fa fa-circle-o"></i> Quản lý Học Sinh</a
               >
             </li>

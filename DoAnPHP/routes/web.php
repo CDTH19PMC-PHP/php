@@ -83,3 +83,5 @@ Route::post('/page-login', [AdminController::class,'xuLyloginAD'])->name('xl-log
 Route::get('/index-admin',[AdminController::class,'indexAD'])->name('index-ad');
 
 Route::get('/table-data-gv',[AdminController::class,'tableDataGV'])->name('table-data-gv');
+
+Route::get('/table-data-hs',[AdminController::class,'tableDataHS'])->name('table-data-hs');

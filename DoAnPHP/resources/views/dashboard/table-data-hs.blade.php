@@ -112,9 +112,9 @@
             <li><a class="treeview-item" href="form-notifications.html"><i class="icon fa fa-circle-o"></i> Form Notifications</a></li>
           </ul>
         </li> -->
-        <li class="treeview is-expanded"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Danh sách quản lý</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li class="treeview is-expanded"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Danh Sách quản lý</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href="{{route('table-data-gv')}}><i class="icon fa fa-circle-o"></i> Quản lý Giáo Viên</a></li>
+            <li><a class="treeview-item" href="{{route('table-data-gv')}}"><i class="icon fa fa-circle-o"></i> Quản lý Giáo Viên</a></li>
             <li><a class="treeview-item active" href="{{route('table-data-hs')}}"><i class="icon fa fa-circle-o"></i> Quản lý Học Sinh</a></li>
           </ul>
         </li>
@@ -160,15 +160,15 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @forelse($dsGiaoVien as $dsgv)
-                  @if($dsgv->trang_thai==1)
+                  @forelse($dsHocSinh as $dshs)
+                  @if($dshs->trang_thai==1)
                   <tr>
-                      <td>{{$dsgv->username}}</td>
-                      <td>{{$dsgv->password}}</td>
-                      <td>{{$dsgv->ho_ten}}</td>
-                      <td>{{$dsgv->dia_chi}}</td>
-                      <td>{{$dsgv->ngay_sinh}}</td>
-                      <td>{{$dsgv->so_dien_thoai}}</td>
+                      <td>{{$dshs->username}}</td>
+                      <td>{{$dshs->password}}</td>
+                      <td>{{$dshs->ho_ten}}</td>
+                      <td>{{$dshs->dia_chi}}</td>
+                      <td>{{$dshs->ngay_sinh}}</td>
+                      <td>{{$dshs->so_dien_thoai}}</td>
                   </tr>
                   @endif
                   @empty
