@@ -107,16 +107,149 @@ class AdminController extends Controller
 
         return redirect()->back()->with("success","Mật khẩu đã được thay đổi thành công!");
     }
-    // danh sách quản lý Giáo Viên
+    //////////////// danh sách quản lý Giáo Viên ///////////////////////
     public function tableDataGV(){
         $dsGiaoVien = GiaoVien::all();
         //$giaoVien = DB::table('giao_vien')->get();
         return view('dashboard.table-data-gv',compact('dsGiaoVien'));
     }
-    // danh sách quản lý Học Sinh
+    public function deleteDSGiaoVienAD($id){
+        $gv = GiaoVien::find($id);
+        $gv->trang_thai = 0;
+        $gv->save();
+        $dsGiaoVien = GiaoVien::all();
+       
+        return view('admin-quan-ly-gv',compact('dsGiaoVien'));
+        // return redirect()->route('admin-quan-ly-gv',$dsGiaoVien);
+    }
+
+    // Chỉnh sửa thông tin cá nhân GV (Admin)
+    public function formInformationGV($id){
+        $editgv = GiaoVien::find($id);
+        return view('admin-quan-ly-gv-edit-form',compact('editgv'));
+    }
+    public function editInformationGV(Request $request,$id){
+        $editGiaoVien = GiaoVien::find($id);
+        $editGiaoVien->username = $request->username;
+        $editGiaoVien->ho_ten = $request->ho_ten;
+        $editGiaoVien->ngay_sinh = $request->ngay_sinh;
+        $editGiaoVien->dia_chi = $request->dia_chi;
+        $editGiaoVien->so_dien_thoai = $request->so_dien_thoai;
+        $editGiaoVien->save();
+
+        $editgv = GiaoVien::find($id);
+
+        return view('admin-quan-ly-gv-info',compact('editgv'));
+    }
+
+    public function formResetPasswordGV($id){
+        $resetPassword = GiaoVien::find($id);
+        return view('admin-quan-ly-gv-reset-password-form',compact('resetPassword'));
+    }
+
+    public function resetPasswordGV($id){
+        $resetPasswordGiaoVien = GiaoVien::find($id);
+        $resetPasswordGiaoVien->password = Hash::make('123456789');
+        $resetPasswordGiaoVien->save();
+
+        $resetPassword = GiaoVien::find($id);
+        return view('admin-quan-ly-gv-reset-password',compact('resetPassword'));
+    }
+    //Add Giáo viên vào danh sách quản lý
+    public function addGVform(){
+        return view('admin-quan-ly-gv-add');
+    }
+    public function handleAddGV(Request $request){
+        $giaoVien = GiaoVien::where('username',$request->username)->first();
+        if($giaoVien == true){
+            return redirect()->back()->with("error","Tài khoản đã tồn tại.");
+        }
+        $gv = new GiaoVien();
+        $gv->username = $request->username;
+        $gv->password = Hash::make('123456789');
+        // $gv->ho_ten=$request->ho_ten;
+        // $gv->ngay_sinh=$request->ngay_sinh;
+        // $gv->dia_chi=$request->dia_chi;
+        // $gv->so_dien_thoai=$request->so_dien_thoai;
+        $gv->ho_ten='Nguyễn Văn A';
+        $gv->ngay_sinh='1/1/1900';
+        $gv->dia_chi='Tp.HCM';
+        $gv->so_dien_thoai='0';
+        $gv->trang_thai = 1;
+        $gv->save();
+        return redirect()->back()->with("success","Thêm tài khoản giáo viên thành công!");
+    }
+    ////////////////////// danh sách quản lý Học Sinh ////////////////////
     public function tableDataHS(){
         $dsHocSinh = HocSinh::all();
         //$giaoVien = DB::table('giao_vien')->get();
         return view('dashboard.table-data-hs',compact('dsHocSinh'));
+    }//Xóa Giáo Viên trong ds GV (change trạng thái = 0)
+    public function deleteDSHocSinhAD($id){
+        $hs = HocSinh::find($id);
+        $hs->trang_thai = 0;
+        $hs->save();
+        $dsHocSinh = HocSinh::all();
+       
+        return view('admin-quan-ly-hs',compact('dsHocSinh'));
+        // return redirect()->route('admin-quan-ly-gv',$dsGiaoVien);
     }
+
+    // Chỉnh sửa thông tin cá nhân GV (Admin)
+    public function formInformationHS($id){
+        $ediths = HocSinh::find($id);
+        return view('admin-quan-ly-hs-edit-form',compact('ediths'));
+    }
+    public function editInformationHS(Request $request,$id){
+        $editHocSinh = HocSinh::find($id);
+        $editHocSinh->username = $request->username;
+        $editHocSinh->ho_ten = $request->ho_ten;
+        $editHocSinh->ngay_sinh = $request->ngay_sinh;
+        $editHocSinh->dia_chi = $request->dia_chi;
+        $editHocSinh->so_dien_thoai = $request->so_dien_thoai;
+        $editHocSinh->save();
+
+        $ediths = HocSinh::find($id);
+
+        return view('admin-quan-ly-hs-info',compact('ediths'));
+    }
+
+    public function formResetPasswordHS($id){
+        $resetPassword = HocSinh::find($id);
+        return view('admin-quan-ly-hs-reset-password-form',compact('resetPassword'));
+    }
+
+    public function resetPasswordHS($id){
+        $resetPasswordHocSinh = HocSinh::find($id);
+        $resetPasswordHocSinh->password = Hash::make('123456789');
+        $resetPasswordHocSinh->save();
+
+        $resetPassword = HocSinh::find($id);
+        return view('admin-quan-ly-hs-reset-password',compact('resetPassword'));
+    }
+    //Add Giáo viên vào danh sách quản lý
+    public function addHSform(){
+        return view('admin-quan-ly-hs-add');
+    }
+    public function handleAddHS(Request $request){
+        $hocSinh = HocSinh::where('username',$request->username)->first();
+        if($hocSinh == true){
+            return redirect()->back()->with("error","Tài khoản đã tồn tại.");
+        }
+        $hs = new HocSinh();
+        $hs->username = $request->username;
+        $hs->password = Hash::make('123456789');
+        // $gv->ho_ten=$request->ho_ten;
+        // $gv->ngay_sinh=$request->ngay_sinh;
+        // $gv->dia_chi=$request->dia_chi;
+        // $gv->so_dien_thoai=$request->so_dien_thoai;
+        $hs->ho_ten='Nguyễn Văn A';
+        $hs->ngay_sinh='1/1/1900';
+        $hs->dia_chi='Tp.HCM';
+        $hs->so_dien_thoai='0';
+        $hs->trang_thai = 1;
+        $hs->save();
+        return redirect()->back()->with("success","Thêm tài khoản học sinh thành công!");
+    }
+    
 }
