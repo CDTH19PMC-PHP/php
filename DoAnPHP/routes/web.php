@@ -92,6 +92,8 @@ Route::get('/admin/{id}',[AdminController::class,'DanhSachLop'])->name('admin-ds
     Route::post('/page-login', [AdminController::class,'xuLyloginAD'])->name('xl-login-ad');
             ///// Index Admin /////
     Route::get('/index-admin',[AdminController::class,'indexAD'])->name('index-ad');
+            ///// Đăng ký tài khoản Admin /////
+    Route::get('/regis-admin',[AdminController::class,'regisAD'])->name('regis-ad');
             ///// Thông Tin Cá Nhân Admin /////
     Route::get('/admin/thong-tin-ca-nhan/{id}',[AdminController::class,'FormThongTinCaNhanAD'])->name('form-thong-tin-ca-nhan-ad');
     Route::post('/admin/thong-tin-ca-nhan/{id}',[AdminController::class,'XuLyThongTinCaNhanAD'])->name('xl-chinh-sua-tt-ad');

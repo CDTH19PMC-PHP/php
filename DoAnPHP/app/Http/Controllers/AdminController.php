@@ -40,6 +40,10 @@ class AdminController extends Controller
     //         echo 'Đăng nhập không thành công';
     //     }
     // }
+    
+    public function regisAD(){
+        return view('dashboard.regis-admin');
+    }
     public function loginAD(){
         return view('dashboard.page-login');
     }

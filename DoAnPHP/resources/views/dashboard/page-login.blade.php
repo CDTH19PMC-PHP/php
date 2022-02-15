@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/main.css')}}">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/font-awesome/4.7.0/css/font-awesome.min.css')}}">
-    <title>Login</title>
+    <title>Đăng Nhập</title>
   </head>
   <body>
     <section class="material-half-bg">
@@ -21,31 +21,37 @@
       <div class="login-box">
         <form class="login-form" action="{{route('xl-login-ad')}}" method="POST">
           @csrf
-          <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN IN</h3>
+          <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>Đăng Nhập</h3>
           <div class="form-group">
-            <label class="control-label">USERNAME</label>
+            <label class="control-label">Tài khoản</label>
             <input class="form-control" type="username" name="username" placeholder="Email" autofocus>
           </div>
           <div class="form-group">
-            <label class="control-label">PASSWORD</label>
+            <label class="control-label">Mật khẩu</label>
             <input class="form-control" type="password" name="password" placeholder="Password">
           </div>
           <div class="form-group">
             <div class="utility">
               <div class="animated-checkbox">
                 <label>
-                  <input type="checkbox"><span class="label-text">Stay Signed in</span>
+                  <input type="checkbox"><span class="label-text">Vẫn đang đăng nhập</span>
                 </label>
               </div>
-              <p class="semibold-text mb-2"><a href="#" data-toggle="flip">Forgot Password ?</a></p>
+              <p class="semibold-text mb-2"><a href="#" data-toggle="flip">Quên mật khẩu ?</a></p>
             </div>
           </div>
           <div class="form-group btn-container">
-            <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
+            <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>Đăng Nhập</button>
+          </div>
+          <div class="form-group btn-container">
+          <p class="semibold-text mb-2" style="text-align:center">Bạn chưa có tài khoản ?</p>
+            <a role="button" class="btn btn-primary btn-block" style="color:white; text-decoration: none;" href="{{route('regis-ad')}}">
+            <i class="fa fa-sign-in fa-lg fa-fw"></i>Đăng Ký</a>
           </div>
         </form>
+
         <form class="forget-form" action="#">
-          <h3 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>Forgot Password ?</h3>
+          <h3 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>Quên mật khẩu ?</h3>
           <div class="form-group">
             <label class="control-label">EMAIL</label>
             <input class="form-control" type="text" placeholder="Email">
@@ -57,11 +63,12 @@
             <p class="semibold-text mb-0"><a href="#" data-toggle="flip"><i class="fa fa-angle-left fa-fw"></i> Back to Login</a></p>
           </div>
         </form>
+        
       </div>
       <div class="text-center p-t-46 p-b-20">
 						<div class="dropdown">
 							<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Dropdown Login
+								Menu Đăng Nhập
 							</button>
 							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 								<a class="dropdown-item" href="{{route('dang-nhap-hs')}}">Học sinh</a>
