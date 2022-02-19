@@ -19,34 +19,48 @@
         <h1>E-Learning</h1>
       </div>
       <div class="dk-box">
-        <form class="login-form" action="#" method="POST">
+        <form class="login-form" action="{{route('xl-regis-ad')}}" method="POST">
+          @csrf
           <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>Đăng Ký</h3>
+          @if (session('error'))
+					<div class="alert alert-danger">
+						{{ session('error') }}
+					</div>
+					@endif
+					@if($errors)
+						@foreach ($errors->all() as $error)
+							<div class="alert alert-danger">{{ $error }}</div>
+						@endforeach
+					@endif
           <div class="form-group">
             <label class="control-label">Tên đăng nhập</label>
-            <input class="form-control" type="text" placeholder="Email" autofocus>
+            <input class="form-control" type="text" placeholder="Email" autofocus name="username">
+            @if($errors->has('username'))
+                    		<span>{{$errors->first('username')}}</span>
+               			@endif
           </div>
           <div class="form-group">
             <label class="control-label">Mật khẩu</label>
-            <input class="form-control" type="password" placeholder="Password">
+            <input class="form-control" type="password" placeholder="Password" name="password">
           </div>
           <div class="form-group">
             <label class="control-label">Họ và tên</label>
-            <input class="form-control" type="text" placeholder="Họ và tên" autofocus>
+            <input class="form-control" type="text" placeholder="Họ và tên" name="ho_ten">
           </div>
           <div class="form-group">
             <label class="control-label">Địa chỉ</label>
-            <input class="form-control" type="text" placeholder="Địa chỉ">
+            <input class="form-control" type="text" placeholder="Địa chỉ" name="dia_chi">
           </div>
           <div class="form-group">
             <label class="control-label">Ngày sinh</label>
-            <input class="form-control" type="text" placeholder="Ngày sinh" autofocus>
+            <input class="form-control" type="text" placeholder="Ngày sinh" name="ngay_sinh">
           </div>
           <div class="form-group">
             <label class="control-label">Số điện thoại</label>
-            <input class="form-control" type="text" placeholder="Số điện thoại">
+            <input class="form-control" type="text" placeholder="Số điện thoại" name="so_dien_thoai">
           </div>
           <div class="form-group btn-container">
-            <button class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>Đăng Ký</button>
+            <button class="btn btn-primary btn-block" type="submit"><i class="fa fa-sign-in fa-lg fa-fw"></i>Đăng Ký</button>
           </div>
         </form> 
       </div>

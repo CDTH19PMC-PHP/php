@@ -4,7 +4,7 @@
     <header>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!--===============================================================================================-->	
+<!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="{{ asset('Login_v18/images/icons/favicon.ico') }}"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{asset('Login_v18/vendor/bootstrap/css/bootstrap.min.css')}}">
@@ -71,6 +71,10 @@
 							Login
 						</button>
 					</div>
+					</br>
+				<p class="text-center  p-b-20 txt2" >Bạn chưa có tài khoản? </p>
+					<a role="button" class="container-login100-form-btn login100-form-btn" style="color:white" href="{{route('dang-ky-gv')}}">Sign Up </a>
+
 
                     <div class="text-center p-t-46 p-b-20">
 						<div class="dropdown">

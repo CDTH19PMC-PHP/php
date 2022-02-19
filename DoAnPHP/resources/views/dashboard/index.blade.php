@@ -192,7 +192,7 @@
               >
             </li>
             <li>
-              <a class="dropdown-item" href="#"
+              <a class="dropdown-item" href="{{route('login-ad')}}"
                 ><i class="fa fa-sign-out fa-lg"></i> Logout</a
               >
             </li>

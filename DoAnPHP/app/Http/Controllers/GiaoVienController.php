@@ -143,6 +143,26 @@ class GiaoVienController extends Controller
     }
 
     ///////////////// Trần Quang Thiện ////////////
+    public function dangKyGV(){
+        return view('singup-gv');
+    }
+    // Xử lý đăng ký
+    public function xuLyDangKyGV(Request $request){
+        $giaoVien = GiaoVien::where('username',$request->username)->first();
+        if($giaoVien == true){
+            return redirect()->back()->with("error","Tài khoản đã tồn tại.");
+        }
+        $gv = new GiaoVien();
+        $gv->username = $request->username;
+        $gv->password = bcrypt($request->get('password'));
+        $gv->ho_ten = $request->ho_ten;
+        $gv->ngay_sinh = $request->ngay_sinh;
+        $gv->dia_chi = $request->dia_chi;
+        $gv->so_dien_thoai = $request->so_dien_thoai;
+        $gv->trang_thai = 1;
+        $gv->save();
+        return view('dang-nhap-giaovien');
+    }
     public function dangNhapGV(){
         return view('dang-nhap-giaovien');
     }

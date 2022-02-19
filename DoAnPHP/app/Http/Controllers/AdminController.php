@@ -44,6 +44,23 @@ class AdminController extends Controller
     public function regisAD(){
         return view('dashboard.regis-admin');
     }
+    // Xử lý đăng ký
+    public function xuLyRegisAD(Request $request){
+        $giaoVien = Admin::where('username',$request->username)->first();
+        if($giaoVien == true){
+            return redirect()->back()->with("error","Tài khoản đã tồn tại.");
+        }
+        $gv = new Admin();
+        $gv->username = $request->username;
+        $gv->password = bcrypt($request->get('password'));
+        $gv->ho_ten = $request->ho_ten;
+        $gv->ngay_sinh = $request->ngay_sinh;
+        $gv->dia_chi = $request->dia_chi;
+        $gv->so_dien_thoai = $request->so_dien_thoai;
+        $gv->trang_thai = 1;
+        $gv->save();
+        return view('dashboard.page-login');
+    }
     public function loginAD(){
         return view('dashboard.page-login');
     }

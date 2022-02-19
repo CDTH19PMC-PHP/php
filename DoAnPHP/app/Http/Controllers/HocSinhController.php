@@ -90,6 +90,26 @@ class HocSinhController extends Controller
         return view('hoc-sinh-danh-sach-lop',compact('danhsachlop','idhs'));
     }
     ///////////////// Trần Quang Thiện ////////////
+    public function dangKyHS(){
+        return view('signup-hs');
+    }
+    // Xử lý đăng ký
+    public function xuLyDangKyHS(Request $request){
+        $hocSinh = HocSinh::where('username',$request->username)->first();
+        if($hocSinh == true){
+            return redirect()->back()->with("error","Tài khoản đã tồn tại.");
+        }
+        $hs = new HocSinh();
+        $hs->username = $request->username;
+        $hs->password = bcrypt($request->get('password'));
+        $hs->ho_ten = $request->ho_ten;
+        $hs->ngay_sinh = $request->ngay_sinh;
+        $hs->dia_chi = $request->dia_chi;
+        $hs->so_dien_thoai = $request->so_dien_thoai;
+        $hs->trang_thai = 1;
+        $hs->save();
+        return view('dang-nhap');
+    }
     public function dangNhapHS(){
         return view('dang-nhap');
     }

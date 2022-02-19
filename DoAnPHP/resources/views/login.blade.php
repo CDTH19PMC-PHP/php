@@ -75,6 +75,10 @@
 							Login
 						</button>
 					</div>
+					</br>
+				<p class="text-center  p-b-20 txt2" >Bạn chưa có tài khoản? </p>
+					<a role="button" class="container-login100-form-btn login100-form-btn" style="color:white" href="#">Sign Up </a>
+
 					
 					<div class="text-center p-t-46 p-b-20">
 					<div class="dropdown">

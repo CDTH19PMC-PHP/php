@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html>
-    <header>
+<html lang="en">
+<head>
+	<title>Đăng Ký Tài Khoản</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="{{ asset('Login_v18/images/icons/favicon.ico') }}"/>
+<!--===============================================================================================-->	
+<link rel="icon" type="image/png" href="{{ asset('Login_v18/images/icons/favicon.ico') }}"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{asset('Login_v18/vendor/bootstrap/css/bootstrap.min.css')}}">
 <!--===============================================================================================-->
@@ -25,78 +26,90 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('Login_v18/css/util.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('Login_v18/css/main.css')}}">
    
-    
-</header>
-
+  <!--===============================================================================================-->
+</head>
 <body style="background-color: #666666;">
 	
 	<div class="limiter">
-
 		<div class="container-login100">
 			<div class="wrap-login100">
-            <form action="{{route('xl-dang-nhap-hs')}}" method="POST" class="login100-form validate-form">
-            @csrf
+				<form class="login100-form validate-form" action="{{route('xl-dang-ky-hs')}}" method="POST">
+					@csrf
 					<span class="login100-form-title p-b-43">
-						Login to continue
+						Đăng Ký Tài Khoản
 					</span>
-            		<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+					@if (session('error'))
+					<div class="alert alert-danger">
+						{{ session('error') }}
+					</div>
+					@endif
+					@if($errors)
+						@foreach ($errors->all() as $error)
+							<div class="alert alert-danger">{{ $error }}</div>
+						@endforeach
+					@endif
+					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
 						<input class="input100" type="text" name="username">
 						<span class="focus-input100"></span>
-						<span class="label-input100">Tài khoản</span>
+						<span class="label-input100">Tài khoản</span>
+						@if($errors->has('username'))
+                    		<span>{{$errors->first('username')}}</span>
+               			@endif
 					</div>
-           			 <div class="wrap-input100 validate-input" data-validate="Password is required">
+					
+					<div class="wrap-input100 validate-input" data-validate="Password is required">
 						<input class="input100" type="password" name="password">
 						<span class="focus-input100"></span>
-						<span class="label-input100">Mật khẩu</span>
+						<span class="label-input100">Mật khẩu</span>
 					</div>
-                    <div class="flex-sb-m w-full p-t-3 p-b-32">
-						<div class="contact100-form-checkbox">
-							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-							<label class="label-checkbox100" for="ckb1">
-								Remember me
-							</label>
-						</div>
-
-						<div>
-							<a href="#" class="txt1">
-								Forgot Password?
-							</a>
-						</div>
+                    <div class="wrap-input100 validate-input">
+						<input class="input100" type="text" name="ho_ten">
+						<span class="focus-input100"></span>
+						<span class="label-input100">Họ và tên</span>
 					</div>
-
-
-                   		 <div class="container-login100-form-btn">
+					
+					<div class="wrap-input100 validate-input">
+						<input class="input100" type="text" name="ngay_sinh">
+						<span class="focus-input100"></span>
+						<span class="label-input100">Ngày sinh</span>
+					</div>
+                    <div class="wrap-input100 validate-input">
+						<input class="input100" type="text" name="dia_chi">
+						<span class="focus-input100"></span>
+						<span class="label-input100">Địa chỉ</span>
+					</div>
+					
+					<div class="wrap-input100 validate-input">
+						<input class="input100" type="text" name="so_dien_thoai">
+						<span class="focus-input100"></span>
+						<span class="label-input100">Số điện thoại</span>
+					</div>
+					<div class="container-login100-form-btn">
 						<button class="login100-form-btn" type="submit">
-							Login
+							Đăng Ký
 						</button>
-						</div>
-					</br>
-				<p class="text-center  p-b-20 txt2" >Bạn chưa có tài khoản? </p>
-					<a role="button" class="container-login100-form-btn login100-form-btn" style="color:white" href="{{route('dang-ky-hs')}}">Sign Up </a>
-
-
-                    <div class="text-center p-t-46 p-b-20">
-					<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  Menu Đăng Nhập
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="{{route('dang-nhap-hs')}}">Học sinh</a>
-    <a class="dropdown-item" href="{{route('dang-nhap-gv')}}">Giáo Viên</a>
-    <a class="dropdown-item" href="{{route('login-ad')}}">Admin</a>
-  </div>
-</div>
 					</div>
-    </form>
+                </br>
+					<div class="login100-form-social flex-c-m">
+						<a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
+							<i class="fa fa-facebook-f" aria-hidden="true"></i>
+						</a>
 
-    <div class="login100-more" style="background-image: url({{asset('Login_v18/images/bg-01.jpg')}});">
+						<a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
+							<i class="fa fa-twitter" aria-hidden="true"></i>
+						</a>
+					</div>
+				</form>
+
+				<div class="login100-more" style="background-image: url({{asset('Login_v18/images/bg-01.jpg')}});">
 				</div>
 			</div>
 		</div>
 	</div>
-	<script src="{{asset('Login_v18/vendor/jquery/jquery-3.2.1.min.js')}}"></script>
+	
+	
 <!--===============================================================================================-->
-	<script src="{{asset('Login_v18/vendor/animsition/js/animsition.min.js')}}"></script>
+<script src="{{asset('Login_v18/vendor/animsition/js/animsition.min.js')}}"></script>
 <!--===============================================================================================-->
 	<script src="{{asset('Login_v18/vendor/bootstrap/js/popper.js')}}"></script>
 	<script src="{{asset('Login_v18/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
@@ -112,5 +125,3 @@
 
 </body>
 </html>
-
-

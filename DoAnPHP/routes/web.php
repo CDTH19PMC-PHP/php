@@ -53,7 +53,9 @@ Route::get('/admin/{id}',[AdminController::class,'DanhSachLop'])->name('admin-ds
 ///////////////// Trần Quang Thiện ////////////
 ///////////////// Trần Quang Thiện ////////////
 
-///////////////// Học Sinh (Admin) ////////////
+///////////////// Học Sinh  ////////////
+    Route::get('/dang-ky', [HocSinhController::class,'dangKyHS'])->name('dang-ky-hs');
+    Route::post('/dang-ky', [HocSinhController::class,'xuLyDangKyHS'])->name('xl-dang-ky-hs');
     Route::get('/dang-nhap', [HocSinhController::class,'dangNhapHS'])->name('dang-nhap-hs');
     Route::post('/dang-nhap', [HocSinhController::class,'xuLyDangNhapHS'])->name('xl-dang-nhap-hs');
             ///// Danh sách học sinh /////
@@ -70,7 +72,9 @@ Route::get('/admin/{id}',[AdminController::class,'DanhSachLop'])->name('admin-ds
     Route::get('/admin-quan-ly-reset-password-hs/{id}',[AdminController::class,'formResetPasswordHS'])->name('form-reset-password-hs');
     Route::post('/admin-quan-ly-reset-password-hs/{id}',[AdminController::class,'resetPasswordHS'])->name('reset-password-hs');
 
-///////////////// Giáo Viên (Admin) ////////////
+///////////////// Giáo Viên  ////////////
+    Route::get('/dang-ky-giaovien', [GiaoVienController::class,'dangKyGV'])->name('dang-ky-gv');
+    Route::post('/dang-ky-giaovien', [GiaoVienController::class,'xuLyDangKyGV'])->name('xl-dang-ky-gv');
     Route::get('/dang-nhap-giaovien', [GiaoVienController::class,'dangNhapGV'])->name('dang-nhap-gv');
     Route::post('/dang-nhap-giaovien', [GiaoVienController::class,'xuLyDangNhapGV'])->name('xl-dang-nhap-gv');
             ///// Danh sách giáo viên /////
@@ -94,6 +98,8 @@ Route::get('/admin/{id}',[AdminController::class,'DanhSachLop'])->name('admin-ds
     Route::get('/index-admin',[AdminController::class,'indexAD'])->name('index-ad');
             ///// Đăng ký tài khoản Admin /////
     Route::get('/regis-admin',[AdminController::class,'regisAD'])->name('regis-ad');
+    Route::post('/regis-admin', [AdminController::class,'xuLyRegisAD'])->name('xl-regis-ad');
+
             ///// Thông Tin Cá Nhân Admin /////
     Route::get('/admin/thong-tin-ca-nhan/{id}',[AdminController::class,'FormThongTinCaNhanAD'])->name('form-thong-tin-ca-nhan-ad');
     Route::post('/admin/thong-tin-ca-nhan/{id}',[AdminController::class,'XuLyThongTinCaNhanAD'])->name('xl-chinh-sua-tt-ad');
