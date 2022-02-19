@@ -70,18 +70,22 @@ class AdminController extends Controller
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
         // Chứng thực thành công
         $user = Auth::user();
-        return view('dashboard.index');
+        $id = Admin::find($user->id);
+       // @dd($id);
+        return view('dashboard.index',compact('id'));
         }else{
             echo 'Đăng nhập không thành công';
         }
     }
-    public function indexAD(){
-        return view('dashboard.index');
+    public function indexAD($a){
+        $id = Admin::find($a);
+      //  @dd($id);
+        return view('dashboard.index',compact('id'));
     }
 
     function FormThongTinCaNhanAD($id){
         $thongtin = Admin::find($id);
-        return view('dashboard.form-admin-thong-tin-ca-nhan',compact('thongtin'));
+        return view('dashboard.form-admin-thong-tin-ca-nhan',compact('thongtin','id'));
     }
     function XuLyThongTinCaNhanAD(Request $req,$id){
         $ad = Admin::find($id);
@@ -91,28 +95,28 @@ class AdminController extends Controller
         $ad->so_dien_thoai=$req->so_dien_thoai;
         $ad->save();
         $thongtin = Admin::find($id);
-        return view('dashboard.thong-tin-ca-nhan-ad',compact('thongtin'));
+        return view('dashboard.thong-tin-ca-nhan-ad',compact('thongtin','id'));
     }
 
     public function changePW($id){
         $change = Admin::find($id); 
-        return view('dashboard.form-admin-thay-doi-pw',compact('change'));
+        return view('dashboard.form-admin-thay-doi-pw',compact('change','id'));
         
     }
     
-    public function updatePW(Request $request) {
+    public function updatePW(Request $request,$id) {
         if (!(Hash::check($request->get('password_old'), Auth::user()->password))) {
             // Mật khẩu phù hợp
-            return redirect()->back()->with("error","Mật khẩu hiện tại của bạn không khớp với mật khẩu.");
+            return redirect()->back()->with("error","Mật khẩu hiện tại của bạn không khớp với mật khẩu.",$id);
         }
 
         if(strcmp($request->get('password_old'), $request->get('password_new')) == 0){
             // Mật khẩu hiện tại và mật khẩu mới giống nhau
-            return redirect()->back()->with("error","Mật khẩu mới không được giống với mật khẩu hiện tại của bạn.");
+            return redirect()->back()->with("error","Mật khẩu mới không được giống với mật khẩu hiện tại của bạn.",$id);
         }
         if(strcmp($request->get('password_new'), $request->get('password_cf')) != 0){
             // Xác nhận mật khẩu không khớp.
-            return redirect()->back()->with("error","Xác nhận mật khẩu không khớp.");
+            return redirect()->back()->with("error","Xác nhận mật khẩu không khớp.",$id);
         }
 
         $validatedData = $request->validate([
@@ -126,13 +130,13 @@ class AdminController extends Controller
         $user->password = bcrypt($request->get('password_new'));
         $user->save();
 
-        return redirect()->back()->with("success","Mật khẩu đã được thay đổi thành công!");
+        return redirect()->back()->with("success","Mật khẩu đã được thay đổi thành công!",$id);
     }
     //////////////// danh sách quản lý Giáo Viên ///////////////////////
-    public function tableDataGV(){
+    public function tableDataGV($id){
         $dsGiaoVien = GiaoVien::all();
         //$giaoVien = DB::table('giao_vien')->get();
-        return view('dashboard.table-data-gv',compact('dsGiaoVien'));
+        return view('dashboard.table-data-gv',compact('dsGiaoVien','id'));
     }
     public function deleteDSGiaoVienAD($id){
         $gv = GiaoVien::find($id);
@@ -140,14 +144,14 @@ class AdminController extends Controller
         $gv->save();
         $dsGiaoVien = GiaoVien::all();
        
-        return view('dashboard.table-data-gv',compact('dsGiaoVien'));
+        return view('dashboard.table-data-gv',compact('dsGiaoVien','id'));
         // return redirect()->route('admin-quan-ly-gv',$dsGiaoVien);
     }
 
     // Chỉnh sửa thông tin cá nhân GV (Admin)
     public function formInformationGV($id){
         $editgv = GiaoVien::find($id);
-        return view('dashboard.admin-quan-ly-gv-edit-form',compact('editgv'));
+        return view('dashboard.admin-quan-ly-gv-edit-form',compact('editgv','id'));
     }
     public function editInformationGV(Request $request,$id){
         $editGiaoVien = GiaoVien::find($id);
@@ -160,12 +164,12 @@ class AdminController extends Controller
 
         $editgv = GiaoVien::find($id);
 
-        return view('dashboard.admin-quan-ly-gv-info',compact('editgv'));
+        return view('dashboard.admin-quan-ly-gv-info',compact('editgv','id'));
     }
 
     public function formResetPasswordGV($id){
         $resetPassword = GiaoVien::find($id);
-        return view('dashboard.admin-quan-ly-gv-reset-password-form',compact('resetPassword'));
+        return view('dashboard.admin-quan-ly-gv-reset-password-form',compact('resetPassword','id'));
     }
 
     public function resetPasswordGV($id){
@@ -174,16 +178,16 @@ class AdminController extends Controller
         $resetPasswordGiaoVien->save();
 
         $resetPassword = GiaoVien::find($id);
-        return view('dashboard.admin-quan-ly-gv-reset-password',compact('resetPassword'));
+        return view('dashboard.admin-quan-ly-gv-reset-password',compact('resetPassword','id'));
     }
     //Add Giáo viên vào danh sách quản lý
-    public function addGVform(){
-        return view('dashboard.admin-quan-ly-gv-add');
+    public function addGVform($id){
+        return view('dashboard.admin-quan-ly-gv-add',compact('id'));
     }
-    public function handleAddGV(Request $request){
+    public function handleAddGV(Request $request,$id){
         $giaoVien = GiaoVien::where('username',$request->username)->first();
         if($giaoVien == true){
-            return redirect()->back()->with("error","Tài khoản đã tồn tại.");
+            return redirect()->back()->with("error","Tài khoản đã tồn tại.",$id);
         }
         $gv = new GiaoVien();
         $gv->username = $request->username;
@@ -198,13 +202,13 @@ class AdminController extends Controller
         $gv->so_dien_thoai='0';
         $gv->trang_thai = 1;
         $gv->save();
-        return redirect()->back()->with("success","Thêm tài khoản giáo viên thành công!");
+        return redirect()->back()->with("success","Thêm tài khoản giáo viên thành công!",$id);
     }
     ////////////////////// danh sách quản lý Học Sinh ////////////////////
-    public function tableDataHS(){
+    public function tableDataHS($id){
         $dsHocSinh = HocSinh::all();
         //$giaoVien = DB::table('giao_vien')->get();
-        return view('dashboard.table-data-hs',compact('dsHocSinh'));
+        return view('dashboard.table-data-hs',compact('dsHocSinh','id'));
     }//Xóa Giáo Viên trong ds GV (change trạng thái = 0)
     public function deleteDSHocSinhAD($id){
         $hs = HocSinh::find($id);
@@ -212,14 +216,14 @@ class AdminController extends Controller
         $hs->save();
         $dsHocSinh = HocSinh::all();
        
-        return view('dashboard.table-data-hs',compact('dsHocSinh'));
+        return view('dashboard.table-data-hs',compact('dsHocSinh','id'));
         // return redirect()->route('admin-quan-ly-gv',$dsGiaoVien);
     }
 
     // Chỉnh sửa thông tin cá nhân GV (Admin)
     public function formInformationHS($id){
         $ediths = HocSinh::find($id);
-        return view('dashboard.admin-quan-ly-hs-edit-form',compact('ediths'));
+        return view('dashboard.admin-quan-ly-hs-edit-form',compact('ediths','id'));
     }
     public function editInformationHS(Request $request,$id){
         $editHocSinh = HocSinh::find($id);
@@ -232,12 +236,12 @@ class AdminController extends Controller
 
         $ediths = HocSinh::find($id);
 
-        return view('dashboard.admin-quan-ly-hs-info',compact('ediths'));
+        return view('dashboard.admin-quan-ly-hs-info',compact('ediths','id'));
     }
 
     public function formResetPasswordHS($id){
         $resetPassword = HocSinh::find($id);
-        return view('dashboard.admin-quan-ly-hs-reset-password-form',compact('resetPassword'));
+        return view('dashboard.admin-quan-ly-hs-reset-password-form',compact('resetPassword','id'));
     }
 
     public function resetPasswordHS($id){
@@ -246,16 +250,16 @@ class AdminController extends Controller
         $resetPasswordHocSinh->save();
 
         $resetPassword = HocSinh::find($id);
-        return view('dashboard.admin-quan-ly-hs-reset-password',compact('resetPassword'));
+        return view('dashboard.admin-quan-ly-hs-reset-password',compact('resetPassword','id'));
     }
     //Add Giáo viên vào danh sách quản lý
-    public function addHSform(){
-        return view('dashboard.admin-quan-ly-hs-add');
+    public function addHSform($id){
+        return view('dashboard.admin-quan-ly-hs-add',compact('id'));
     }
-    public function handleAddHS(Request $request){
+    public function handleAddHS(Request $request,$id){
         $hocSinh = HocSinh::where('username',$request->username)->first();
         if($hocSinh == true){
-            return redirect()->back()->with("error","Tài khoản đã tồn tại.");
+            return redirect()->back()->with("error","Tài khoản đã tồn tại.",$id);
         }
         $hs = new HocSinh();
         $hs->username = $request->username;
@@ -270,7 +274,7 @@ class AdminController extends Controller
         $hs->so_dien_thoai='0';
         $hs->trang_thai = 1;
         $hs->save();
-        return redirect()->back()->with("success","Thêm tài khoản học sinh thành công!");
+        return redirect()->back()->with("success","Thêm tài khoản học sinh thành công!",$id);
     }
     
 }

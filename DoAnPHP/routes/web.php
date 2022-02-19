@@ -59,10 +59,10 @@ Route::get('/admin/{id}',[AdminController::class,'DanhSachLop'])->name('admin-ds
     Route::get('/dang-nhap', [HocSinhController::class,'dangNhapHS'])->name('dang-nhap-hs');
     Route::post('/dang-nhap', [HocSinhController::class,'xuLyDangNhapHS'])->name('xl-dang-nhap-hs');
             ///// Danh sách học sinh /////
-    Route::get('/table-data-hs',[AdminController::class,'tableDataHS'])->name('table-data-hs');
+    Route::get('/table-data-hs/{id}',[AdminController::class,'tableDataHS'])->name('table-data-hs');
     // Thêm học sinh
-    Route::get('/admin-quan-ly-hs-add',[AdminController::class,'addHSform'])->name('add-hs-form');
-    Route::post('/admin-quan-ly-hs-add',[AdminController::class,'handleAddHS'])->name('handle-add-hs');
+    Route::get('/admin-quan-ly-hs-add/{id}',[AdminController::class,'addHSform'])->name('add-hs-form');
+    Route::post('/admin-quan-ly-hs-add/{id}',[AdminController::class,'handleAddHS'])->name('handle-add-hs');
     // Xóa
     Route::get('/admin-quan-ly-hs/{id}',[AdminController::class,'deleteDSHocSinhAD'])->name('xoa-ds-quan-ly-hs');
     // Sửa
@@ -78,10 +78,10 @@ Route::get('/admin/{id}',[AdminController::class,'DanhSachLop'])->name('admin-ds
     Route::get('/dang-nhap-giaovien', [GiaoVienController::class,'dangNhapGV'])->name('dang-nhap-gv');
     Route::post('/dang-nhap-giaovien', [GiaoVienController::class,'xuLyDangNhapGV'])->name('xl-dang-nhap-gv');
             ///// Danh sách giáo viên /////
-    Route::get('/table-data-gv',[AdminController::class,'tableDataGV'])->name('table-data-gv');
+    Route::get('/table-data-gv/{id}',[AdminController::class,'tableDataGV'])->name('table-data-gv');
     // Thêm giáo viên
-    Route::get('/admin-quan-ly-gv-add',[AdminController::class,'addGVform'])->name('add-gv-form');
-    Route::post('/admin-quan-ly-gv-add',[AdminController::class,'handleAddGV'])->name('handle-add-gv');
+    Route::get('/admin-quan-ly-gv-add/{id}',[AdminController::class,'addGVform'])->name('add-gv-form');
+    Route::post('/admin-quan-ly-gv-add/{id}',[AdminController::class,'handleAddGV'])->name('handle-add-gv');
     // Xóa
     Route::get('/admin-quan-ly-gv/{id}',[AdminController::class,'deleteDSGiaoVienAD'])->name('xoa-ds-quan-ly-gv');
     // Sửa
@@ -95,7 +95,7 @@ Route::get('/admin/{id}',[AdminController::class,'DanhSachLop'])->name('admin-ds
     Route::get('/page-login',[AdminController::class,'loginAD'])->name('login-ad');
     Route::post('/page-login', [AdminController::class,'xuLyloginAD'])->name('xl-login-ad');
             ///// Index Admin /////
-    Route::get('/index-admin',[AdminController::class,'indexAD'])->name('index-ad');
+    Route::get('/index-admin/{id}',[AdminController::class,'indexAD'])->name('index-ad');
             ///// Đăng ký tài khoản Admin /////
     Route::get('/regis-admin',[AdminController::class,'regisAD'])->name('regis-ad');
     Route::post('/regis-admin', [AdminController::class,'xuLyRegisAD'])->name('xl-regis-ad');

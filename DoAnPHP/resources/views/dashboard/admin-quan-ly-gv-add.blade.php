@@ -15,7 +15,7 @@
             <div class="alert alert-danger">{{ $error }}</div>
         @endforeach
     @endif
-    <form method="POST" acction="{{route('handle-add-gv')}}">
+    <form method="POST" acction="{{route('handle-add-gv',$id)}}">
         @csrf
         <table>
             <tr>

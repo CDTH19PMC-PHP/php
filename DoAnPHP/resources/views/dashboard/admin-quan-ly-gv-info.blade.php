@@ -5,4 +5,4 @@
 <h3>Địa chỉ: {{$editgv->dia_chi}} </h3>
 <h3>Số điện Thoại: {{$editgv->so_dien_thoai}} </h3>
 <a href="{{route('edit-information-gv', $editgv->id)}}">Chỉnh sửa</a></br>
-<a href="{{route('table-data-gv')}}">Quay lại</a></br>
+<a href="{{route('table-data-gv',$id)}}">Quay lại</a></br>

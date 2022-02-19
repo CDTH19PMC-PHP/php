@@ -5,4 +5,4 @@
 <h3>Ngày Sinh: {{$resetPassword->ngay_sinh}} </h3>
 <h3>Địa chỉ: {{$resetPassword->dia_chi}} </h3>
 <h3>Số điện Thoại: {{$resetPassword->so_dien_thoai}} </h3>
-<a href="{{route('table-data-hs')}}">Quay lại</a></br>
+<a href="{{route('table-data-hs',$id)}}">Quay lại</a></br>

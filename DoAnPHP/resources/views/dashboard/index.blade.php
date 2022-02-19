@@ -35,7 +35,7 @@
   <body class="app sidebar-mini rtl">
     <!-- Navbar-->
     <header class="app-header">
-      <a class="app-header__logo" href="{{route('index-ad')}}">E-learning</a>
+      <a class="app-header__logo" href="{{route('index-ad',$id->id)}}">E-learning</a>
       <!-- Sidebar toggle button--><a
         class="app-sidebar__toggle"
         href="#"
@@ -183,17 +183,17 @@
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
             <li>
               <a class="dropdown-item" href="#"
-                ><i class="fa fa-cog fa-lg"></i> Settings</a
+                ><i class="fa fa-cog fa-lg"></i> Cài đặt</a
               >
             </li>
             <li>
-              <a class="dropdown-item" href="#"
-                ><i class="fa fa-user fa-lg"></i> Profile</a
+              <a class="dropdown-item" href="{{route('form-thong-tin-ca-nhan-ad',$id->id)}}"
+                ><i class="fa fa-user fa-lg"></i> Thông tin cá nhân</a
               >
             </li>
             <li>
-              <a class="dropdown-item" href="{{route('login-ad')}}"
-                ><i class="fa fa-sign-out fa-lg"></i> Logout</a
+              <a class="dropdown-item" href="{{route('login-ad',$id->id)}}"
+                ><i class="fa fa-sign-out fa-lg"></i> Đăng xuất</a
               >
             </li>
           </ul>
@@ -292,12 +292,12 @@
           ></a>
           <ul class="treeview-menu">
             <li>
-              <a class="treeview-item" href="{{route('table-data-gv')}}"
+              <a class="treeview-item" href="{{route('table-data-gv',$id->id)}}"
                 ><i class="icon fa fa-circle-o"></i> Quản lý Giáo Viên</a
               >
             </li>
             <li>
-              <a class="treeview-item" href="{{route('table-data-hs')}}"
+              <a class="treeview-item" href="{{route('table-data-hs',$id->id)}}"
                 ><i class="icon fa fa-circle-o"></i> Quản lý Học Sinh</a
               >
             </li>
