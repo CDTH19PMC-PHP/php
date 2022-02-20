@@ -170,11 +170,11 @@
                       <td>{{$dsgv->ngay_sinh}}</td>
                       <td>{{$dsgv->so_dien_thoai}}</td>
                       <th><a class="" style="text-decoration: none; color:red" onclick="return confirm('Bạn có chắc không?')" 
-                      href="{{route('xoa-ds-quan-ly-gv', $dsgv->id)}}">Xóa </a>|
+                      href="{{route('xoa-ds-quan-ly-gv', ['id'=>$id,'id_gv'=> $dsgv->id])}}">Xóa </a>|
                       <a class="" style="text-decoration: none; color:black"
-                      href="{{route('form-information-gv', $dsgv->id)}}"> Sửa</a>|
-                      <a class="" style="text-decoration: none; color:black"
-                      href="{{route('form-reset-password-gv', $dsgv->id)}}">Cài lại mật khẩu</a>
+                      href="{{route('form-information-gv', ['id'=>$id,'id_gv'=> $dsgv->id])}}"> Sửa</a>|
+                      <a class="" style="text-decoration: none; color:black" onclick="return confirm('Bạn có chắc không?')"
+                      href="{{route('reset-password-gv', ['id'=>$id,'id_gv'=> $dsgv->id])}}">Cài lại mật khẩu</a>
                       </th>
                   </tr>
                   @endif

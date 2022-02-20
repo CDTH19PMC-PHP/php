@@ -170,11 +170,11 @@
                       <td>{{$dshs->ngay_sinh}}</td>
                       <td>{{$dshs->so_dien_thoai}}</td>
                       <td><a class="" style="text-decoration: none; color:red" onclick="return confirm('Bạn có chắc không?')" 
-                      href="{{route('xoa-ds-quan-ly-hs', $dshs->id)}}">Xóa </a>|
+                      href="{{route('xoa-ds-quan-ly-hs',['id'=>$id,'id_hs'=> $dshs->id])}}">Xóa </a>|
                       <a class="" style="text-decoration: none; color:black"
-                      href="{{route('form-information-hs', $dshs->id)}}"> Sửa</a>|
-                      <a class="" style="text-decoration: none; color:black"
-                      href="{{route('form-reset-password-hs', $dshs->id)}}">Cài lại mật khẩu</a>
+                      href="{{route('form-information-hs', ['id'=>$id,'id_hs'=> $dshs->id])}}"> Sửa</a>|
+                      <a class="" style="text-decoration: none; color:black" onclick="return confirm('Bạn có chắc không?')"
+                      href="{{route('reset-password-hs', ['id'=>$id,'id_hs'=> $dshs->id])}}">Cài lại mật khẩu</a>
                       </td>
                   </tr>
                   @endif

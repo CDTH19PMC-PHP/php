@@ -64,13 +64,13 @@ Route::get('/admin/{id}',[AdminController::class,'DanhSachLop'])->name('admin-ds
     Route::get('/admin-quan-ly-hs-add/{id}',[AdminController::class,'addHSform'])->name('add-hs-form');
     Route::post('/admin-quan-ly-hs-add/{id}',[AdminController::class,'handleAddHS'])->name('handle-add-hs');
     // Xóa
-    Route::get('/admin-quan-ly-hs/{id}',[AdminController::class,'deleteDSHocSinhAD'])->name('xoa-ds-quan-ly-hs');
+    Route::get('/admin-quan-ly-hs/{id}/{id_hs}',[AdminController::class,'deleteDSHocSinhAD'])->name('xoa-ds-quan-ly-hs');
     // Sửa
-    Route::get('/admin-quan-ly-hs-edit/{id}',[AdminController::class,'formInformationHS'])->name('form-information-hs');
-    Route::post('/admin-quan-ly-hs-edit/{id}',[AdminController::class,'editInformationHS'])->name('edit-information-hs');
+    Route::get('/admin-quan-ly-hs-edit/{id}/{id_hs}',[AdminController::class,'formInformationHS'])->name('form-information-hs');
+    Route::post('/admin-quan-ly-hs-edit/{id}/{id_hs}',[AdminController::class,'editInformationHS'])->name('edit-information-hs');
     // Reset password
-    Route::get('/admin-quan-ly-reset-password-hs/{id}',[AdminController::class,'formResetPasswordHS'])->name('form-reset-password-hs');
-    Route::post('/admin-quan-ly-reset-password-hs/{id}',[AdminController::class,'resetPasswordHS'])->name('reset-password-hs');
+    //Route::get('/admin-quan-ly-reset-password-hs/{id}',[AdminController::class,'formResetPasswordHS'])->name('form-reset-password-hs');
+    Route::get('/admin-quan-ly-reset-password-hs/{id}/{id_hs}',[AdminController::class,'resetPasswordHS'])->name('reset-password-hs');
 
 ///////////////// Giáo Viên  ////////////
     Route::get('/dang-ky-giaovien', [GiaoVienController::class,'dangKyGV'])->name('dang-ky-gv');
@@ -83,13 +83,13 @@ Route::get('/admin/{id}',[AdminController::class,'DanhSachLop'])->name('admin-ds
     Route::get('/admin-quan-ly-gv-add/{id}',[AdminController::class,'addGVform'])->name('add-gv-form');
     Route::post('/admin-quan-ly-gv-add/{id}',[AdminController::class,'handleAddGV'])->name('handle-add-gv');
     // Xóa
-    Route::get('/admin-quan-ly-gv/{id}',[AdminController::class,'deleteDSGiaoVienAD'])->name('xoa-ds-quan-ly-gv');
+    Route::get('/admin-quan-ly-gv/{id}/{id_gv}',[AdminController::class,'deleteDSGiaoVienAD'])->name('xoa-ds-quan-ly-gv');
     // Sửa
-    Route::get('/admin-quan-ly-gv-edit/{id}',[AdminController::class,'formInformationGV'])->name('form-information-gv');
-    Route::post('/admin-quan-ly-gv-edit/{id}',[AdminController::class,'editInformationGV'])->name('edit-information-gv');
+    Route::get('/admin-quan-ly-gv-edit/{id}/{id_gv}',[AdminController::class,'formInformationGV'])->name('form-information-gv');
+    Route::post('/admin-quan-ly-gv-edit/{id}/{id_gv}',[AdminController::class,'editInformationGV'])->name('edit-information-gv');
     // Reset password
-    Route::get('/admin-quan-ly-reset-password-gv/{id}',[AdminController::class,'formResetPasswordGV'])->name('form-reset-password-gv');
-    Route::post('/admin-quan-ly-reset-password-gv/{id}',[AdminController::class,'resetPasswordGV'])->name('reset-password-gv');
+    //Route::get('/admin-quan-ly-reset-password-gv/{id}',[AdminController::class,'formResetPasswordGV'])->name('form-reset-password-gv');
+    Route::get('/admin-quan-ly-reset-password-gv/{id}/{id_gv}',[AdminController::class,'resetPasswordGV'])->name('reset-password-gv');
 
 //////////////// Admin ////////////
     Route::get('/page-login',[AdminController::class,'loginAD'])->name('login-ad');
