@@ -117,15 +117,22 @@ class HocSinhController extends Controller
     public function xuLyDangNhapHS(Request $request){
         $hocsinh = Hocsinh::where('username',$request->username)->first();
 
-        $danhsachlop = DB::table('lop')->join('hoc_sinh_hoc_lop','lop.id','=','hoc_sinh_hoc_lop.ma_lop')->select('lop.ma_lop','so_luong','ten_lop','trang_thai')->where('hoc_sinh_hoc_lop.ma_hoc_sinh','=',$hocsinh->id)->where('hoc_sinh_hoc_lop.trang_thai_lop','=','1')->get();
+        $danhsachlop = DB::table('lop')
+        ->join('hoc_sinh_hoc_lop','lop.id','=','hoc_sinh_hoc_lop.ma_lop')
+        ->select('lop.ma_lop','so_luong','ten_lop','trang_thai')
+        ->where('hoc_sinh_hoc_lop.ma_hoc_sinh','=',$hocsinh->id)
+        ->where('hoc_sinh_hoc_lop.trang_thai_lop','=','1')
+        ->get();
         
         $idhs = $hocsinh->id;
      
         if(empty($hocsinh)){
-            echo "Tên đăng nhập không đúng";
-        }elseif(!Hash::check($request->password,$hocsinh->password)){
-            echo "Mật khẩu không đúng";
-        }else{
+            return redirect()->back()->with("error","Đăng nhập không thành công");
+        }
+        elseif(!Hash::check($request->password,$hocsinh->password)){
+            return redirect()->back()->with("error","Đăng nhập không thành công");
+        }
+        else{
             return redirect()->route('ds-hs-lop',$hocsinh->id);
           
         }

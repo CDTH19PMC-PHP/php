@@ -74,7 +74,7 @@ class AdminController extends Controller
        // @dd($id);
         return view('dashboard.index',compact('id'));
         }else{
-            echo 'Đăng nhập không thành công';
+            return redirect()->back()->with("error","Đăng nhập không thành công");
         }
     }
     public function indexAD($a){
@@ -138,33 +138,31 @@ class AdminController extends Controller
         //$giaoVien = DB::table('giao_vien')->get();
         return view('dashboard.table-data-gv',compact('dsGiaoVien','id'));
     }
-    public function deleteDSGiaoVienAD($id){
-        $gv = GiaoVien::find($id);
+    public function deleteDSGiaoVienAD($id,$id_hs){
+        $gv = GiaoVien::find($id_hs);
         $gv->trang_thai = 0;
         $gv->save();
         $dsGiaoVien = GiaoVien::all();
        
-        return view('dashboard.table-data-gv',compact('dsGiaoVien','id'));
-        // return redirect()->route('admin-quan-ly-gv',$dsGiaoVien);
+        return redirect()->route('table-data-gv',$id);
     }
 
     // Chỉnh sửa thông tin cá nhân GV (Admin)
-    public function formInformationGV($id){
-        $editgv = GiaoVien::find($id);
-        return view('dashboard.admin-quan-ly-gv-edit-form',compact('editgv','id'));
+    public function formInformationGV($id,$id_gv){
+        $thongtin = GiaoVien::find($id_gv);
+        return view('dashboard.admin-quan-ly-gv-edit-form',compact('id','id_gv','thongtin'));
     }
-    public function editInformationGV(Request $request,$id){
-        $editGiaoVien = GiaoVien::find($id);
-        $editGiaoVien->username = $request->username;
+    public function editInformationGV(Request $request,$id,$id_gv){
+        $editGiaoVien = GiaoVien::find($id_gv);
         $editGiaoVien->ho_ten = $request->ho_ten;
         $editGiaoVien->ngay_sinh = $request->ngay_sinh;
         $editGiaoVien->dia_chi = $request->dia_chi;
         $editGiaoVien->so_dien_thoai = $request->so_dien_thoai;
         $editGiaoVien->save();
 
-        $editgv = GiaoVien::find($id);
+        $editgv = GiaoVien::find($id_gv);
 
-        return view('dashboard.admin-quan-ly-gv-info',compact('editgv','id'));
+        return redirect()->route('table-data-gv',['id'=>$id]);
     }
 
     // public function formResetPasswordGV($id){
@@ -195,7 +193,7 @@ class AdminController extends Controller
         }
         $gv = new GiaoVien();
         $gv->username = $request->username;
-        $gv->password = Hash::make('123456789');
+        $gv->password = Hash::make('12345');
         // $gv->ho_ten=$request->ho_ten;
         // $gv->ngay_sinh=$request->ngay_sinh;
         // $gv->dia_chi=$request->dia_chi;
@@ -213,7 +211,7 @@ class AdminController extends Controller
         $dsHocSinh = HocSinh::all();
         //$giaoVien = DB::table('giao_vien')->get();
         return view('dashboard.table-data-hs',compact('dsHocSinh','id'));
-    }//Xóa Giáo Viên trong ds GV (change trạng thái = 0)
+    }//Xóa HocSinhn trong ds HS (change trạng thái = 0)
     public function deleteDSHocSinhAD($id,$id_hs){
         $hs = HocSinh::find($id_hs);
         $hs->trang_thai = 0;
@@ -223,20 +221,21 @@ class AdminController extends Controller
         return redirect()->route('table-data-hs',$id);
         // return redirect()->route('admin-quan-ly-gv',$dsGiaoVien);
     }
+    
 
     // Chỉnh sửa thông tin cá nhân GV (Admin)
     public function formInformationHS($id,$id_hs){
     //     $ediths = HocSinh::find($id_hs);
     //     $dsHocSinh = HocSinh::all();
     //     //return view('dashboard.admin-quan-ly-hs-edit-form',compact('ediths','id'));
-         
-        $ediths = HocSinh::find($id_hs);
-        return redirect()->route('form-information-hs',$id);
+        
+        $thongtin = HocSinh::find($id_hs);
+        return view('dashboard.admin-quan-ly-hs-edit-form',compact('id','id_hs','thongtin'));
     }
 
-    public function editInformationHS(Request $request,$id_hs,$id){
+    public function editInformationHS(Request $request,$id,$id_hs){
         $editHocSinh = HocSinh::find($id_hs);
-        $editHocSinh->username = $request->username;
+        
         $editHocSinh->ho_ten = $request->ho_ten;
         $editHocSinh->ngay_sinh = $request->ngay_sinh;
         $editHocSinh->dia_chi = $request->dia_chi;
@@ -244,7 +243,7 @@ class AdminController extends Controller
         $editHocSinh->save();
 
         $ediths = HocSinh::find($id_hs);
-        return redirect()->route('edit-information-hs',$id);
+        return redirect()->route('table-data-hs',['id'=>$id]);
         //return view('dashboard.admin-quan-ly-hs-info',compact('ediths','id'));
     }
 

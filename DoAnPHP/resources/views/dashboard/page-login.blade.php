@@ -19,12 +19,26 @@
         <h1>E-Learning</h1>
       </div>
       <div class="login-box">
+            
         <form class="login-form" action="{{route('xl-login-ad')}}" method="POST">
           @csrf
           <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>Đăng Nhập</h3>
+          @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+            @if($errors)
+                @foreach ($errors->all() as $error)
+                    <div class="alert alert-danger">{{ $error }}</div>
+                @endforeach
+            @endif
           <div class="form-group">
             <label class="control-label">Tài khoản</label>
             <input class="form-control" type="username" name="username" placeholder="Email" autofocus>
+            @if($errors->has('username'))
+              span>{{$errors->first('username')}}</span>
+            @endif
           </div>
           <div class="form-group">
             <label class="control-label">Mật khẩu</label>

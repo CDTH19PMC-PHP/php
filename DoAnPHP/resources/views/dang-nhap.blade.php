@@ -39,10 +39,23 @@
 					<span class="login100-form-title p-b-43">
 						Login to continue
 					</span>
+					@if (session('error'))
+					<div class="alert alert-danger">
+						{{ session('error') }}
+					</div>
+					@endif
+					@if($errors)
+						@foreach ($errors->all() as $error)
+							<div class="alert alert-danger">{{ $error }}</div>
+						@endforeach
+					@endif
             		<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
 						<input class="input100" type="text" name="username">
 						<span class="focus-input100"></span>
 						<span class="label-input100">Tài khoản</span>
+						@if($errors->has('username'))
+							span>{{$errors->first('username')}}</span>
+						@endif
 					</div>
            			 <div class="wrap-input100 validate-input" data-validate="Password is required">
 						<input class="input100" type="password" name="password">

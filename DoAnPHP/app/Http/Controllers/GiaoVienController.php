@@ -170,9 +170,9 @@ class GiaoVienController extends Controller
     public function xuLyDangNhapGV(Request $request){
         $gv = GiaoVien::where('username',$request->username)->first();
         if(empty($gv)){
-            echo "Tên đăng nhập không đúng";
+            return redirect()->back()->with("error","Đăng nhập không thành công");
         }elseif(!Hash::check($request->password,$gv->password)){
-            echo "Mật khẩu không đúng";
+            return redirect()->back()->with("error","Đăng nhập không thành công");
         }else{
             return redirect()->route('ds-lop',$gv->id);
         }
