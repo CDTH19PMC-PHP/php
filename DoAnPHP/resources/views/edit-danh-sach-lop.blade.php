@@ -20,7 +20,15 @@ Thông tin lớp
 </div> 
 @endif
 <a  class="btn btn--radius btn--green" href="{{route('form-them-hoc-sinh',['gv'=>$giaovien,'id'=>$lop])}}">Thêm học sinh </a>
-<span><a  class="btn btn--radius btn--green" href="{{route('form-duyet-hoc-sinh',['gv'=>$giaovien,'id'=>$lop])}}">Danh sách hàng chờ</a> </span>
+<span><a  class="btn btn--radius btn--green" href="{{route('form-duyet-hoc-sinh',['gv'=>$giaovien,'id'=>$lop])}}">Danh sách hàng chờ</a>
+<a  class="btn btn--radius btn--green" href="{{route('ds-bt',['gv'=>$giaovien,'id'=>$lop])}}">Danh sách bài tập</a>
+<a  class="btn btn--radius btn--green" href="{{route('ds-tb',['gv'=>$giaovien,'id'=>$lop])}}">Danh sách Thông Báo</a>
+<form class="timkiem" type="get"action="{{route('tim-sv',['id'=>$lop,'gv'=>$giaovien])}}" >
+							<input class="otimkiem" name="query" type="search">
+							<button class="nutbam" type="submit"> Tìm Kiếm Sinh Viên</button>
+						</form>
+</span>
+</span>
 <table>
                     @csrf
 						<thead>

@@ -38,19 +38,40 @@ Route::post('giao-vien/thong-tin-lop/them-hoc-sinh/{gv}/{id}',[GiaoVienControlle
 Route::get('giao-vien/thong-tin-lop/danh-sach-duyet/{gv}/{id}',[GiaoVienController::class,'FormDuyet'])->name('form-duyet-hoc-sinh');
 Route::get('giao-vien/thong-tin-lop/danh-sach-duyet/hoc-sinh/{gv}/{id}/{hs}',[GiaoVienController::class,'Duyet'])->name('xl-duyet-hoc-sinh');
 
+//baitap: gv: mã giáo viên, còn id: mã lớp
+Route::get('/bai-tap/{gv}/{id}',[GiaoVienController::class, 'danhsachbaitap'])->name('ds-bt');
+Route::get('/bai-tap/them-bt/{gv}/{id}',[GiaoVienController::class,'thembaitap'])->name('them-bt');
+Route::post('/bai-tap/them-bt/{gv}/{id}',[GiaoVienController::class,'xulythembaitap'])->name('xuly-bt');
+Route::get('/bai-tap/xoa-bt/{gv}/{id}/{idbt}',[GiaoVienController::class,'xoabt'])->name('xoa-bt');
+Route::get('/bai-tap/ct-baitap/{gv}/{id}/{id_bt}',[GiaoVienController::class,'chitietbaitap'])->name('show-bt');
+Route::get('/bai-tap/tim-kiem-bt/{gv}/{id}',[GiaoVienController::class,'timkiembaitap'])->name('tim-bt');
+Route::get('/bai-tap/sv/{gv}/{id}',[GiaoVienController::class, 'svxemdanhsachbaitap'])->name('svxem-ds-bt');
+Route::get('/bai-tap/tim-kiem-btsv/{gv}/{id}',[GiaoVienController::class,'timkiembaitapsv'])->name('tim-btsv');
+Route::get('/bai-tap/ct-baitapsv/{gv}/{id}/{id_bt}',[GiaoVienController::class,'chitietbaitapsv'])->name('show-btsv');
+Route::get('/thong-bao/{gv}/{id}',[GiaoVienController::class, 'danhsachtb'])->name('ds-tb');
+Route::get('/bai-tap/them-tb/{gv}/{id}',[GiaoVienController::class,'themtb'])->name('them-tb');
+Route::post('/bai-tap/them-tb/{gv}/{id}',[GiaoVienController::class,'xulythemtb'])->name('xuly-tb');
+Route::get('/bai-tap/xoa-tb/{gv}/{id}/{idtb}',[GiaoVienController::class,'xoatb'])->name('xoa-tb');
+Route::get('/bai-tap/ct-tb/{gv}/{id}/{id_tb}',[GiaoVienController::class,'chitiettb'])->name('show-tb');
+Route::get('/bai-tap/tim-kiem-tb/{gv}/{id}',[GiaoVienController::class,'timkiemtb'])->name('tim-tb');
+Route::get('/thong-bao/sv/{gv}/{id}',[GiaoVienController::class, 'danhsachtbsv'])->name('ds-tbsv');
+Route::get('/thong-bao/tim-tb/{gv}/{id}',[GiaoVienController::class,'timkiemtbsv'])->name('tim-tbsv');
+Route::get('/thong-bao/ct-tb/{gv}/{id}/{id_tb}',[GiaoVienController::class,'chitiettbsv'])->name('show-tbsv');
+Route::get('giao-vien/thong-tin-lop/tim-sv/{gv}/{id}',[GiaoVienController::class,'timkiemsv'])->name('tim-sv');
+
 // Học sinh
 Route::get('/hoc-sinh/{id}',[HocSinhController::class,'DanhSachLop'])->name('ds-hs-lop');
 Route::post('/hoc-sinh/{id}',[HocSinhController::class,'ThemLopMoi'])->name('hs-them-lop');
+Route::get('/hoc-sinh/ds-btsv/{id}/{id_lop}',[HocSinhController::class, 'dsbaitapsv'])->name('ds-bt-sv');
 
 Route::get('hoc-sinh/thong-tin-ca-nhan/{id}',[HocSinhController::class,'ThongTinCaNhan'])->name('hs-thong-tin-ca-nhan');
 
 Route::get('hoc-sinh/thong-tin-ca-nhan/chinh-sua/{id}',[HocSinhController::class,'FormThongTinCaNhan'])->name('form-thong-tin-ca-nhan');
 Route::post('hoc-sinh/thong-tin-ca-nhan/chinh-sua/{id}',[HocSinhController::class,'XuLyThongTinCaNhan'])->name('xl-thong-tin-ca-nhan');
-
 // Admin
 Route::get('/admin/{id}',[AdminController::class,'DanhSachLop'])->name('admin-ds-lop');
 
-///////////////// Trần Quang Thiện ////////////
+
 ///////////////// Trần Quang Thiện ////////////
 
 ///////////////// Học Sinh  ////////////
@@ -107,7 +128,6 @@ Route::get('/admin/{id}',[AdminController::class,'DanhSachLop'])->name('admin-ds
     Route::get('/form-admin-thay-doi-pw/{id}',[AdminController::class,'changePW'])->name('changePW');
     Route::post('/form-admin-thay-doi-pw/{id}',[AdminController::class,'updatePW'])->name('update-pw');
 
-///////////////// Trần Quang Thiện ////////////
 ///////////////// Trần Quang Thiện ////////////
 
 

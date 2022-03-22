@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Models\Lop;
 use App\Models\GiaoVien;
 use App\Models\HocSinh;
+use App\Models\BaiTap;
+use App\Models\ThongBao;
 use App\Models\HocSinhThuocLop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -178,5 +180,141 @@ class GiaoVienController extends Controller
         }
     }
     ///////////////// Trần Quang Thiện ////////////
-   
+    public function xulyupbai(Request $req)
+    {
+        $req->file('file')->store('docs');
+       return "Bai Tap Da Duoc Up Len";
+    }
+    function danhsachbaitap($gv,$id){
+        
+      $baitap =DB::table('bai_tap')->join('lop','bai_tap.ma_lop','=','lop.id',)->select('ten_bt','bai_tap.id','bai_tap.ma_lop','bai_tap.diem','bai_tap.thoi_gian','bai_tap.trang_thai','lop.ma_giao_vien')->where('lop.id','=',$id)->where('bai_tap.trang_thai','=',1)->get();
+       return view('dsbt',compact('baitap','gv','id'));
+    
+    }
+    
+    function thembaitap($gv,$id){
+        return view('form_thembt',compact('id','gv'));
+        
+}
+function xulythembaitap(Request $req,$gv,$id){
+    $baitap = new BaiTap;
+    $baitap->diem =$req->diem ;
+    $baitap->thoi_gian= Carbon::now();
+    $baitap->ten_bt = $req->name;
+    $baitap->noi_dung = $req->noidung;
+    $baitap->trang_thai = 1;
+    $baitap->ma_lop = $id;
+    $baitap->save();
+    $req->file('file')->store('public');
+    $req -> session()->flash('success',' Thêm bài tập thành công!');
+        
+    $baitap =DB::table('bai_tap')->join('lop','bai_tap.ma_lop','=','lop.id',)->select('ten_bt','bai_tap.id','bai_tap.ma_lop','bai_tap.diem','bai_tap.thoi_gian','bai_tap.trang_thai','lop.ma_giao_vien')->where('lop.id','=',$id)->where('bai_tap.trang_thai','=',1)->get();
+    return view('dsbt',compact('baitap','gv','id'));
+    
+ 
+}
+
+function xoabt(Request $req,$gv,$id,$idbt){
+    $baitap = BaiTap::find($idbt);
+    $baitap->trang_thai=0;
+    $baitap->save();
+    $req -> session()->flash('success', 'đã xoá bài');
+
+    $baitap =DB::table('bai_tap')->join('lop','bai_tap.ma_lop','=','lop.id',)->select('ten_bt','bai_tap.id','bai_tap.ma_lop','bai_tap.diem','bai_tap.thoi_gian','bai_tap.trang_thai','lop.ma_giao_vien')->where('lop.id','=',$id)->where('bai_tap.trang_thai','=',1)->get();
+    return view('dsbt',compact('baitap','gv','id'));
+
+
+  
+}
+
+function chitietbaitap($gv,$id,$id_bt){
+    $baitap = BaiTap::find($id_bt);
+    return view('ct_bt',compact('baitap','gv','id','id_bt'));
+}
+function timkiembaitap($gv,$id){
+    $search_text=$_GET['query'];
+$tenbt=BaiTap::where('ten_bt','LIKE','%'.$search_text.'%')->where('trang_thai','=',1)->get();
+return view('show_tkbt',compact('tenbt','gv','id'));
+}
+function svxemdanhsachbaitap($gv,$id){
+        
+    $baitap =DB::table('bai_tap')->join('lop','bai_tap.ma_lop','=','lop.id',)->select('ten_bt','bai_tap.id','bai_tap.ma_lop','bai_tap.diem','bai_tap.thoi_gian','bai_tap.trang_thai','lop.ma_giao_vien')->where('lop.id','=',$id)->where('bai_tap.trang_thai','=',1)->get();
+     return view('dsbtchosv',compact('baitap','gv','id'));
+  
+  }
+  function timkiembaitapsv($gv,$id){
+    $search_text=$_GET['query'];
+$tenbt=BaiTap::where('ten_bt','LIKE','%'.$search_text.'%')->where('trang_thai','=',1)->get();
+return view('show_tkbtsv',compact('tenbt','gv','id'));
+}
+function chitietbaitapsv($gv,$id,$id_bt){
+    $baitap = BaiTap::find($id_bt);
+    return view('ct_btsv',compact('baitap','gv','id','id_bt'));
+}
+
+function danhsachtb($gv,$id){
+        
+    $tb =DB::table('thong_bao')->join('lop','thong_bao.ma_lop','=','lop.id',)->select('ten_tb','thong_bao.id','thong_bao.ma_lop','thong_bao.thoi_gian','thong_bao.trang_thai','lop.ma_giao_vien')->where('lop.id','=',$id)->where('thong_bao.trang_thai','=',1)->get();
+     return view('dstb',compact('tb','gv','id'));
+  
+  }
+
+  function themtb($gv,$id){
+    return view('form_themtb',compact('id','gv'));
+    
+}
+function xulythemtb(Request $req,$gv,$id){
+    $tb = new ThongBao;
+    $tb->thoi_gian= Carbon::now();
+    $tb->ten_tb = $req->name;
+    $tb->noi_dungtb = $req->noidung;
+    $tb->trang_thai = 1;
+    $tb->ma_lop = $id;
+    $tb->save();
+    $req -> session()->flash('success',' Thêm bài tập thành công!');
+    $tb =DB::table('thong_bao')->join('lop','thong_bao.ma_lop','=','lop.id',)->select('ten_tb','thong_bao.id','thong_bao.ma_lop','thong_bao.thoi_gian','thong_bao.trang_thai','lop.ma_giao_vien')->where('lop.id','=',$id)->where('thong_bao.trang_thai','=',1)->get();
+    return view('dstb',compact('tb','gv','id'));
+ 
+ 
+}
+function xoatb(Request $req,$gv,$id,$idtb){
+    $tb = ThongBao::find($idtb);
+    $tb->trang_thai=0;
+    $tb->save();
+    $req -> session()->flash('success', 'đã xoá thông báo');
+    $tb =DB::table('thong_bao')->join('lop','thong_bao.ma_lop','=','lop.id',)->select('ten_tb','thong_bao.id','thong_bao.ma_lop','thong_bao.thoi_gian','thong_bao.trang_thai','lop.ma_giao_vien')->where('lop.id','=',$id)->where('thong_bao.trang_thai','=',1)->get();
+    return view('dstb',compact('tb','gv','id'));
+ 
+
+
+}
+function chitiettb($gv,$id,$id_tb){
+    $tb = ThongBao::find($id_tb);
+    return view('ct_tb',compact('tb','gv','id','id_tb'));
+}
+function timkiemtb($gv,$id){
+    $search_text=$_GET['query'];
+$tentb=ThongBao::where('ten_tb','LIKE','%'.$search_text.'%')->where('trang_thai','=',1)->get();
+return view('show_tktb',compact('tentb','gv','id'));
+}
+function timkiemsv($gv,$id){
+    $search_text=$_GET['query'];
+$tensv=HocSinh::where('username','LIKE','%'.$search_text.'%')->where('trang_thai','=',1)->get();
+return view('show_tksv',compact('tensv','gv','id'));
+}
+function danhsachtbsv($gv,$id){
+        
+    $tb =DB::table('thong_bao')->join('lop','thong_bao.ma_lop','=','lop.id',)->select('ten_tb','thong_bao.id','thong_bao.ma_lop','thong_bao.thoi_gian','thong_bao.trang_thai','lop.ma_giao_vien')->where('lop.id','=',$id)->where('thong_bao.trang_thai','=',1)->get();
+     return view('tb_sv',compact('tb','gv','id'));
+  
+  }
+  function timkiemtbsv($gv,$id){
+    $search_text=$_GET['query'];
+$tentb=ThongBao::where('ten_tb','LIKE','%'.$search_text.'%')->where('trang_thai','=',1)->get();
+return view('show_tktbsv',compact('tentb','gv','id'));
+}
+function chitiettbsv($gv,$id,$id_tb){
+    $tb = ThongBao::find($id_tb);
+    return view('ct_tbsv',compact('tb','gv','id','id_tb'));
+}
 }

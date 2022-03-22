@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Lop;
 use App\Models\GiaoVien;
+use App\Models\BaiTap;
 use App\Models\HocSinh;
 use App\Models\HocSinhThuocLop;
 use Illuminate\Support\Str;
@@ -138,4 +139,13 @@ class HocSinhController extends Controller
         }
     }
     ///////////////// Trần Quang Thiện ////////////
+    function dsbaitapsv($id,$idlop){
+        $baitap =DB::table('bai_tap')->join('lop','bai_tap.ma_lop','=','lop.id',)->select('ten_bt','bai_tap.id','bai_tap.ma_lop','bai_tap.diem','bai_tap.thoi_gian','bai_tap.trang_thai','lop.ma_giao_vien')->where('lop.id','=',$idlop)->get();
+        foreach( $baitap as $a){
+            $gv = $a->ma_giao_vien;
+        }
+       
+        return view('dsbtchosv',compact('baitap','id','idlop','gv'));
+     
+    }
 }

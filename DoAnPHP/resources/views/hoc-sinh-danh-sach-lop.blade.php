@@ -46,6 +46,7 @@ Học sinh
     <th class="column3">Tên Lớp Học</th>
     <th class="column3">Số lượng học sinh</th>
     <th class="column3">Chức năng</th>
+    <th class="column3">Chức năng</th>
 </tr>
 </thead>
 <tbody>
@@ -55,7 +56,8 @@ Học sinh
     <th class="column2">{{$a->ma_lop}}</th>
     <th class="column3">{{$a->ten_lop}}</th>
     <th class="column3">{{$a->so_luong}}</th>
-    <th class="column3"><a href="#">View</a></th>
+    <th class="column3"><a href="#">Xem Bài Tập</a>
+    <th class="column3"><a href="#">Xem Thông Báo Lớp</a></th>
 </tr>
 
 @endif

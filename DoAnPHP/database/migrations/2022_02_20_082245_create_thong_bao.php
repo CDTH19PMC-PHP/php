@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateExerciseTable extends Migration
+class CreateThongBao extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateExerciseTable extends Migration
      */
     public function up()
     {
-        Schema::create('bai_tap', function (Blueprint $table) {
+        Schema::create('thong_bao', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('ma_lop');
-            $table->string('ten_bt');
-            $table->string('noi_dung');
+            $table->string('ten_tb');
+            $table->string('noi_dungtb');
             $table->dateTime('thoi_gian');
-            $table->integer('diem');
             $table->integer('trang_thai')->default(0);
             $table->softDeletes();
             $table->timestamps();
@@ -33,6 +32,6 @@ class CreateExerciseTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bai_tap');
+        Schema::dropIfExists('thong_bao');
     }
 }
